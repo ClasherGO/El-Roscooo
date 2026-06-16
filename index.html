@@ -1,108 +1,214 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rosco Interactivo - Grandes Pensadores de la Modernidad</title>
+  <title>🎯 Rosco Interactivo - Grandes Pensadores</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+
     * { box-sizing: border-box; }
+    
     body { 
       margin: 0; 
       padding: 1rem; 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      min-height: 100vh;
     }
-    
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .titulo {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    .titulo h1 {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 900;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .titulo p {
+      margin: 0.5rem 0 0 0;
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 300;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
     .controls-top {
       display: flex;
-      gap: 8px;
-      margin-bottom: 1.5rem;
+      gap: 12px;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
       justify-content: center;
+      position: relative;
+      z-index: 1;
     }
     
     .mode-button {
-      padding: 0.65rem 1.25rem;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      background: white;
-      color: #333;
-      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 15px;
+      border: 2px solid white;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border-radius: 50px;
       cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
+      transition: all 0.3s;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
     
     .mode-button:hover {
-      background: #f0f0f0;
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
     
     .mode-button.active {
-      background: #4CAF50;
-      color: white;
-      border-color: #4CAF50;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #333;
+      border-color: #FFD700;
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255,215,0,0.4);
     }
-    
+
     .rosco-container { 
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
       display: flex; 
       flex-direction: column; 
-      gap: 1.5rem;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
     }
     
     .rosco-circle {
       width: 100%;
       aspect-ratio: 1;
       position: relative;
+      perspective: 1000px;
     }
     
     .rosco-svg {
       width: 100%;
       height: 100%;
       cursor: pointer;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.3));
+      animation: float 3s ease-in-out infinite;
     }
-    
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
     .question-box {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 1.5rem;
-      min-height: 140px;
+      background: rgba(255,255,255,0.95);
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 20px;
+      padding: 2rem;
+      min-height: 180px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
     
     .question-text {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 1rem;
-      line-height: 1.5;
+      font-size: 18px;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-weight: 500;
     }
     
     .input-group {
       display: flex;
       gap: 8px;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
     
     .answer-input {
       flex: 1;
-      padding: 0.75rem;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
       font-family: inherit;
+      font-weight: 500;
+      transition: all 0.3s;
     }
     
     .answer-input:focus {
       outline: none;
-      border-color: #4CAF50;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+      border-color: #FF6B6B;
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+      transform: scale(1.02);
     }
     
     .answer-input:disabled {
@@ -114,73 +220,97 @@
     .button-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
     }
     
     .button-group button {
-      padding: 0.75rem;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      background: white;
-      color: #333;
-      border-radius: 6px;
+      padding: 12px;
+      font-size: 15px;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
+      transition: all 0.3s;
+      font-weight: 600;
     }
     
     .button-group button:hover:not(:disabled) {
-      background: #f0f0f0;
-      border-color: #999;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    .button-group button:active:not(:disabled) {
+      transform: translateY(-1px);
     }
     
     .button-group button:disabled {
-      opacity: 0.5;
+      opacity: 0.6;
       cursor: not-allowed;
     }
     
     .feedback {
-      margin-top: 0.75rem;
-      padding: 0.75rem;
-      border-radius: 6px;
-      font-size: 14px;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 15px;
       text-align: center;
-      font-weight: 500;
+      font-weight: 600;
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .feedback.correct {
-      background: #c8e6c9;
-      color: #2e7d32;
-      border-left: 4px solid #4CAF50;
+      background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+      color: #1a5f3a;
+      border-left: 5px solid #2ecc71;
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
     }
 
     .feedback.incorrect {
-      background: #ffcdd2;
-      color: #c62828;
-      border-left: 4px solid #f44336;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: #8b0000;
+      border-left: 5px solid #e74c3c;
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
     }
 
     .score-display {
-      font-size: 14px;
-      color: #666;
-      margin-top: 1rem;
+      font-size: 16px;
+      color: white;
+      margin-top: 1.5rem;
       text-align: center;
-      padding: 0.75rem;
-      background: #f5f5f5;
-      border-radius: 6px;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(255,107,107,0.8), rgba(255,193,7,0.8));
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .letter-selected {
-      font-size: 16px;
-      font-weight: 600;
-      color: #4CAF50;
-      margin-bottom: 0.5rem;
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
     }
 
     .intento-counter {
-      font-size: 12px;
-      color: #999;
-      margin-top: 0.5rem;
+      font-size: 13px;
+      color: #f39c12;
+      margin-top: 0.75rem;
+      font-weight: 600;
     }
 
     .exposition-mode {
@@ -192,65 +322,87 @@
     }
 
     .exposition-content {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      min-height: 250px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      min-height: 300px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      animation: slideUp 0.6s ease;
     }
 
     .exposition-letter {
-      font-size: 48px;
-      font-weight: 700;
-      color: #4CAF50;
-      margin-bottom: 1rem;
+      font-size: 64px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      animation: bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     .exposition-question {
-      font-size: 18px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 1rem;
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
     }
 
     .exposition-answer {
-      font-size: 24px;
-      font-weight: 600;
-      color: #4CAF50;
-      padding: 1.25rem;
-      background: #f1f8f4;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid #4CAF50;
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff6b6b, #ffa502);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: 1.5rem;
+      background-color: rgba(255, 107, 107, 0.1);
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      border-left: 5px solid #ff6b6b;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-30px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
 
     .exposition-explanation {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #555;
-      margin-bottom: 1rem;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #34495e;
+      margin-bottom: 1.5rem;
     }
 
     .exposition-nav {
       display: flex;
-      gap: 8px;
+      gap: 12px;
     }
 
     .exposition-nav button {
       flex: 1;
-      padding: 0.75rem;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      background: white;
-      color: #333;
-      border-radius: 6px;
+      padding: 12px;
+      font-size: 15px;
+      border: 2px solid white;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      transition: all 0.3s;
     }
 
-    .exposition-nav button:hover {
-      background: #f0f0f0;
+    .exposition-nav button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
 
     .exposition-nav button:disabled {
@@ -260,17 +412,18 @@
 
     .progress-bar {
       width: 100%;
-      height: 6px;
-      background: #e0e0e0;
-      border-radius: 3px;
-      margin-bottom: 1.5rem;
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      margin-bottom: 2rem;
       overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .progress-fill {
       height: 100%;
-      background: #4CAF50;
-      transition: width 0.3s;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .interactive-mode {
@@ -285,46 +438,78 @@
       transition: all 0.3s ease;
     }
 
+    .letter-circle:hover circle:not(.solved circle) {
+      filter: brightness(1.1);
+    }
+
     .letter-circle.solved circle {
-      fill: #4CAF50 !important;
-      stroke: #2e7d32 !important;
+      fill: #2ecc71 !important;
+      stroke: #27ae60 !important;
+      filter: drop-shadow(0 0 10px rgba(46, 204, 113, 0.6));
     }
 
     .letter-circle.solved text {
       fill: white !important;
-      font-weight: 700;
+      font-weight: 900;
     }
 
-    .titulo {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #333;
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #FFD700;
+      pointer-events: none;
     }
 
-    .titulo h1 {
-      margin: 0;
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .sound-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      color: white;
       font-size: 28px;
-      color: #2c3e50;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      z-index: 100;
     }
 
-    .titulo p {
-      margin: 0.5rem 0 0 0;
-      font-size: 14px;
-      color: #666;
+    .sound-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .sound-toggle.muted {
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
     }
   </style>
 </head>
 <body>
 
+<div class="stars" id="stars"></div>
+
 <div class="titulo">
-  <h1>🎯 Rosco Interactivo</h1>
+  <h1>🎯 ROSCO ÉPICO</h1>
   <p>Grandes Pensadores de la Modernidad</p>
 </div>
 
 <div class="controls-top">
-  <button class="mode-button active" id="btn-modo-juego">🎮 Modo Juego</button>
-  <button class="mode-button" id="btn-modo-exposicion">📚 Modo Estudio</button>
+  <button class="mode-button active" id="btn-modo-juego">🎮 Juego</button>
+  <button class="mode-button" id="btn-modo-exposicion">📚 Estudio</button>
 </div>
+
+<button class="sound-toggle" id="sound-toggle">🔊</button>
 
 <div class="rosco-container">
   <!-- MODO JUEGO INTERACTIVO -->
@@ -333,12 +518,16 @@
       <svg class="rosco-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="shadow">
-            <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-opacity="0.15"/>
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
           </filter>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+          </linearGradient>
         </defs>
         
-        <circle cx="200" cy="200" r="60" fill="#f5f5f5" stroke="#ddd" stroke-width="1" filter="url(#shadow)"/>
-        <text x="200" y="210" text-anchor="middle" font-size="32" font-weight="600" fill="#333" id="center-letter">A</text>
+        <circle cx="200" cy="200" r="65" fill="url(#grad1)" stroke="white" stroke-width="3" filter="url(#shadow)"/>
+        <text x="200" y="215" text-anchor="middle" font-size="40" font-weight="900" fill="white" id="center-letter">A</text>
         
         <g id="letters"></g>
       </svg>
@@ -355,14 +544,14 @@
           <input type="text" class="answer-input" id="answer-input" placeholder="Escribe tu respuesta...">
         </div>
         <div class="button-group">
-          <button id="btn-check">Comprobar</button>
-          <button id="btn-skip">Saltar</button>
+          <button id="btn-check">✓ Comprobar</button>
+          <button id="btn-skip">⊘ Saltar</button>
         </div>
         <div id="feedback"></div>
         <div class="intento-counter" id="intento-counter"></div>
       </div>
       
-      <div class="score-display" id="score-display">Aciertos: 0 / 0</div>
+      <div class="score-display" id="score-display">🎯 Aciertos: 0 / 0</div>
     </div>
   </div>
 
@@ -376,7 +565,7 @@
       <div class="exposition-letter" id="exp-letter">A</div>
       <div class="exposition-question" id="exp-question">Pregunta cargando...</div>
       <div class="exposition-answer" id="exp-answer">Respuesta</div>
-      <div class="exposition-explanation" id="exp-explanation">Explicación del tema</div>
+      <div class="exposition-explanation" id="exp-explanation">Explicación</div>
     </div>
 
     <div class="exposition-nav">
@@ -387,6 +576,74 @@
 </div>
 
 <script>
+  // ========== AUDIO CONTEXT ==========
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  let soundEnabled = true;
+
+  function playSound(frequency, duration, type = 'sine') {
+    if (!soundEnabled) return;
+    
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    
+    osc.frequency.value = frequency;
+    osc.type = type;
+    
+    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+    
+    osc.start(audioContext.currentTime);
+    osc.stop(audioContext.currentTime + duration);
+  }
+
+  function playSoundCorrect() {
+    playSound(523.25, 0.1); // C5
+    setTimeout(() => playSound(659.25, 0.1), 100); // E5
+    setTimeout(() => playSound(783.99, 0.2), 200); // G5
+  }
+
+  function playSoundIncorrect() {
+    playSound(200, 0.1);
+    setTimeout(() => playSound(150, 0.2), 100);
+  }
+
+  function playSoundClick() {
+    playSound(400, 0.05);
+  }
+
+  // ========== ESTRELLAS PARPADEAN ==========
+  function createStars() {
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starsContainer.appendChild(star);
+    }
+  }
+
+  // ========== CONFETTI ==========
+  function createConfetti() {
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = '-10px';
+      confetti.style.background = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FF69B4', '#00BFFF'][Math.floor(Math.random() * 5)];
+      confetti.style.animation = `confettiFall ${2 + Math.random()}s linear forwards`;
+      confetti.style.delay = Math.random() * 0.3 + 's';
+      document.body.appendChild(confetti);
+      
+      setTimeout(() => confetti.remove(), 3000);
+    }
+  }
+
+  // ========== DATOS DE PREGUNTAS ==========
   const preguntas = {
     'A': { 
       pregunta: '¿Quién fue el padre del socialismo científico?', 
@@ -559,11 +816,13 @@
   function dibujarRosco() {
     const svg = document.getElementById('letters');
     const radio = 150;
+    const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA502', '#2ECC71', '#9B59B6'];
 
     letras.forEach((letra, i) => {
       const angulo = (i / 26) * Math.PI * 2 - Math.PI / 2;
       const x = 200 + radio * Math.cos(angulo);
       const y = 200 + radio * Math.sin(angulo);
+      const color = colores[i % colores.length];
 
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.style.cursor = 'pointer';
@@ -572,24 +831,27 @@
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
-      circle.setAttribute('r', 24);
-      circle.setAttribute('fill', 'white');
-      circle.setAttribute('stroke', '#ddd');
-      circle.setAttribute('stroke-width', '1');
+      circle.setAttribute('r', 26);
+      circle.setAttribute('fill', color);
+      circle.setAttribute('stroke', 'white');
+      circle.setAttribute('stroke-width', '2');
       circle.setAttribute('filter', 'url(#shadow)');
       
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       text.setAttribute('x', x);
-      text.setAttribute('y', y + 7);
+      text.setAttribute('y', y + 8);
       text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('font-size', '18');
-      text.setAttribute('font-weight', '600');
-      text.setAttribute('fill', '#333');
+      text.setAttribute('font-size', '20');
+      text.setAttribute('font-weight', '900');
+      text.setAttribute('fill', 'white');
       text.textContent = letra;
 
       g.appendChild(circle);
       g.appendChild(text);
-      g.addEventListener('click', () => seleccionarLetra(i));
+      g.addEventListener('click', () => {
+        playSoundClick();
+        seleccionarLetra(i);
+      });
       
       elementosLetras[letra] = g;
       svg.appendChild(g);
@@ -599,6 +861,7 @@
   function iluminarLetra(letra) {
     if (elementosLetras[letra]) {
       elementosLetras[letra].classList.add('solved');
+      createConfetti();
     }
   }
 
@@ -622,7 +885,7 @@
     const pregunta = preguntas[letra];
     
     document.getElementById('center-letter').textContent = letra;
-    document.getElementById('letter-display').textContent = `Letra ${letra}`;
+    document.getElementById('letter-display').textContent = `🎯 Letra ${letra}`;
     document.getElementById('question-text').textContent = pregunta.pregunta;
     document.getElementById('answer-input').focus();
     document.getElementById('answer-input').disabled = false;
@@ -654,11 +917,13 @@
       totalPreguntas++;
       letrasResueltas.add(letra);
       iluminarLetra(letra);
-      mostrarFeedback(true, `¡Correcto! La respuesta es ${datos.respuesta} (Intento ${intentosActual})`);
+      playSoundCorrect();
+      mostrarFeedback(true, `🎉 ¡CORRECTO! ${datos.respuesta} (Intento ${intentosActual})`);
       document.getElementById('answer-input').disabled = true;
     } else {
-      mostrarFeedback(false, `Incorrecto. Intenta de nuevo (Intento ${intentosActual})`);
-      document.getElementById('intento-counter').textContent = `Intentos: ${intentosActual}`;
+      playSoundIncorrect();
+      mostrarFeedback(false, `❌ Incorrecto. Intenta de nuevo (Intento ${intentosActual})`);
+      document.getElementById('intento-counter').textContent = `⚠️ Intentos: ${intentosActual}`;
       document.getElementById('answer-input').value = '';
       document.getElementById('answer-input').focus();
     }
@@ -675,7 +940,7 @@
     totalPreguntas++;
     const letra = letras[letraActual];
     const datos = preguntas[letra];
-    mostrarFeedback(false, `Saltada. La respuesta correcta es ${datos.respuesta}`);
+    mostrarFeedback(false, `⏭️ Saltada. La respuesta es ${datos.respuesta}`);
     document.getElementById('answer-input').disabled = true;
     actualizarScore();
   }
@@ -687,7 +952,7 @@
   }
 
   function actualizarScore() {
-    document.getElementById('score-display').textContent = `Aciertos: ${aciertos} / ${totalPreguntas}`;
+    document.getElementById('score-display').textContent = `🎯 Aciertos: ${aciertos} / ${totalPreguntas}`;
   }
 
   function cambiarModo(nuevo_modo) {
@@ -736,6 +1001,7 @@
     if (letraActual < 25) mostrarExposicion(letraActual + 1);
   }
 
+  // Event Listeners
   document.getElementById('btn-check').addEventListener('click', comprobarRespuesta);
   document.getElementById('btn-skip').addEventListener('click', saltarPregunta);
   document.getElementById('answer-input').addEventListener('keypress', (e) => {
@@ -747,6 +1013,15 @@
   document.getElementById('btn-exp-prev').addEventListener('click', exposicionAnterior);
   document.getElementById('btn-exp-next').addEventListener('click', exposicionSiguiente);
 
+  // Sound Toggle
+  document.getElementById('sound-toggle').addEventListener('click', function() {
+    soundEnabled = !soundEnabled;
+    this.classList.toggle('muted');
+    this.textContent = soundEnabled ? '🔊' : '🔇';
+  });
+
+  // Initialize
+  createStars();
   dibujarRosco();
 </script>
 
