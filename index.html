@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Rosco Interactivo - Grandes Pensadores</title>
+  <title>🎯 Rosco Épico - Grandes Pensadores</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
 
@@ -14,10 +14,11 @@
       margin: 0; 
       padding: 1rem; 
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
       background-size: 400% 400%;
       animation: gradient 15s ease infinite;
       min-height: 100vh;
+      overflow: hidden;
     }
 
     @keyframes gradient {
@@ -51,6 +52,42 @@
       50% { opacity: 1; }
     }
 
+    .flying-cane {
+      position: fixed;
+      font-size: 80px;
+      top: 50%;
+      animation: flyAcross 6s linear infinite;
+      z-index: 2;
+      opacity: 0.6;
+      filter: grayscale(100%);
+    }
+
+    .flying-cane.right {
+      animation: flyAcrossRight 6s linear infinite;
+    }
+
+    @keyframes flyAcross {
+      0% { left: -100px; }
+      100% { left: 100vw; }
+    }
+
+    @keyframes flyAcrossRight {
+      0% { right: -100px; }
+      100% { right: 100vw; }
+    }
+
+    .jellyfish {
+      position: fixed;
+      font-size: 60px;
+      animation: jellyFloat 8s infinite ease-in-out;
+      z-index: 2;
+    }
+
+    @keyframes jellyFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-100px) rotate(20deg); opacity: 0.8; }
+    }
+
     .titulo {
       position: relative;
       z-index: 1;
@@ -63,14 +100,14 @@
       margin: 0;
       font-size: 48px;
       font-weight: 900;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
       animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .titulo p {
       margin: 0.5rem 0 0 0;
       font-size: 16px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.8);
       font-weight: 300;
       animation: fadeIn 1.2s ease;
     }
@@ -99,28 +136,28 @@
       padding: 12px 28px;
       font-size: 15px;
       border: 2px solid white;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.1);
       color: white;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s;
       font-weight: 600;
       backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     
     .mode-button:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.2);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
     
     .mode-button.active {
-      background: linear-gradient(135deg, #FFD700, #FFA500);
-      color: #333;
-      border-color: #FFD700;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border-color: #2ecc71;
       transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+      box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
     }
 
     .rosco-container { 
@@ -145,7 +182,7 @@
       width: 100%;
       height: 100%;
       cursor: pointer;
-      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
       animation: float 3s ease-in-out infinite;
     }
 
@@ -163,7 +200,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
       backdrop-filter: blur(10px);
       animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -206,8 +243,8 @@
     
     .answer-input:focus {
       outline: none;
-      border-color: #FF6B6B;
-      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+      border-color: #2ecc71;
+      box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
       transform: scale(1.02);
     }
     
@@ -227,7 +264,7 @@
       padding: 12px;
       font-size: 15px;
       border: 2px solid transparent;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
       color: white;
       border-radius: 12px;
       cursor: pointer;
@@ -237,7 +274,7 @@
     
     .button-group button:hover:not(:disabled) {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
     }
     
     .button-group button:active:not(:disabled) {
@@ -271,17 +308,17 @@
     }
 
     .feedback.correct {
-      background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-      color: #1a5f3a;
-      border-left: 5px solid #2ecc71;
-      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border-left: 5px solid #229954;
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
     }
 
     .feedback.incorrect {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-      color: #8b0000;
-      border-left: 5px solid #e74c3c;
-      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+      border-left: 5px solid #a93226;
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
     }
 
     .score-display {
@@ -290,27 +327,124 @@
       margin-top: 1.5rem;
       text-align: center;
       padding: 1rem;
-      background: linear-gradient(135deg, rgba(255,107,107,0.8), rgba(255,193,7,0.8));
+      background: linear-gradient(135deg, rgba(46,204,113,0.8), rgba(39,174,96,0.8));
       border-radius: 12px;
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .letter-selected {
       font-size: 18px;
       font-weight: 700;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #2ecc71;
       margin-bottom: 0.75rem;
     }
 
     .intento-counter {
       font-size: 13px;
-      color: #f39c12;
+      color: #e74c3c;
       margin-top: 0.75rem;
       font-weight: 600;
+    }
+
+    .exposition-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-radius: 25px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      z-index: 1000;
+      animation: modalAppear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    @keyframes modalAppear {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes modalDisappear {
+      from {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    .exposition-modal.hide {
+      animation: modalDisappear 0.4s ease forwards;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-modal:hover {
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .modal-letter {
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .modal-question {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .modal-answer {
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: 1rem;
+      background-color: rgba(46,204,113,0.1);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #2ecc71;
+    }
+
+    .modal-explanation {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #34495e;
+      max-height: 200px;
+      overflow-y: auto;
     }
 
     .exposition-mode {
@@ -319,111 +453,6 @@
 
     .exposition-mode.active {
       display: block;
-    }
-
-    .exposition-content {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      min-height: 300px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-      animation: slideUp 0.6s ease;
-    }
-
-    .exposition-letter {
-      font-size: 64px;
-      font-weight: 900;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.5rem;
-      animation: bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .exposition-question {
-      font-size: 20px;
-      font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
-    }
-
-    .exposition-answer {
-      font-size: 32px;
-      font-weight: 900;
-      background: linear-gradient(135deg, #ff6b6b, #ffa502);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      padding: 1.5rem;
-      background-color: rgba(255, 107, 107, 0.1);
-      border-radius: 15px;
-      margin-bottom: 2rem;
-      border-left: 5px solid #ff6b6b;
-      animation: slideIn 0.5s ease;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateX(-30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    .exposition-explanation {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #34495e;
-      margin-bottom: 1.5rem;
-    }
-
-    .exposition-nav {
-      display: flex;
-      gap: 12px;
-    }
-
-    .exposition-nav button {
-      flex: 1;
-      padding: 12px;
-      font-size: 15px;
-      border: 2px solid white;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-
-    .exposition-nav button:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .exposition-nav button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .interactive-mode {
@@ -438,6 +467,17 @@
       transition: all 0.3s ease;
     }
 
+    .letter-circle circle {
+      fill: #cccccc;
+      transition: all 0.4s ease;
+    }
+
+    .letter-circle text {
+      fill: #666666;
+      font-weight: 700;
+      transition: all 0.4s ease;
+    }
+
     .letter-circle:hover circle:not(.solved circle) {
       filter: brightness(1.1);
     }
@@ -445,7 +485,7 @@
     .letter-circle.solved circle {
       fill: #2ecc71 !important;
       stroke: #27ae60 !important;
-      filter: drop-shadow(0 0 10px rgba(46, 204, 113, 0.6));
+      filter: drop-shadow(0 0 15px rgba(46, 204, 113, 0.8));
     }
 
     .letter-circle.solved text {
@@ -453,17 +493,19 @@
       font-weight: 900;
     }
 
-    .confetti {
+    .green-particle {
       position: fixed;
-      width: 10px;
-      height: 10px;
-      background: #FFD700;
+      width: 8px;
+      height: 8px;
+      background: #2ecc71;
+      border-radius: 50%;
       pointer-events: none;
+      box-shadow: 0 0 8px rgba(46, 204, 113, 0.8);
     }
 
-    @keyframes confettiFall {
+    @keyframes particleFloat {
       to {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(-150px) translateX(var(--tx)) rotateZ(360deg);
         opacity: 0;
       }
     }
@@ -475,7 +517,7 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
       border: none;
       color: white;
       font-size: 28px;
@@ -492,6 +534,23 @@
 
     .sound-toggle.muted {
       background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    }
+
+    .final-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      padding: 3rem;
+      border-radius: 25px;
+      text-align: center;
+      z-index: 999;
+      font-size: 32px;
+      font-weight: 900;
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
   </style>
 </head>
@@ -512,7 +571,6 @@
 <button class="sound-toggle" id="sound-toggle">🔊</button>
 
 <div class="rosco-container">
-  <!-- MODO JUEGO INTERACTIVO -->
   <div class="interactive-mode" id="interactive-section">
     <div class="rosco-circle">
       <svg class="rosco-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -520,13 +578,9 @@
           <filter id="shadow">
             <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
           </filter>
-          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-          </linearGradient>
         </defs>
         
-        <circle cx="200" cy="200" r="65" fill="url(#grad1)" stroke="white" stroke-width="3" filter="url(#shadow)"/>
+        <circle cx="200" cy="200" r="65" fill="#666666" stroke="white" stroke-width="3" filter="url(#shadow)"/>
         <text x="200" y="215" text-anchor="middle" font-size="40" font-weight="900" fill="white" id="center-letter">A</text>
         
         <g id="letters"></g>
@@ -555,24 +609,17 @@
     </div>
   </div>
 
-  <!-- MODO EXPOSICIÓN -->
   <div class="exposition-mode" id="exposition-section">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-    </div>
-
-    <div class="exposition-content">
-      <div class="exposition-letter" id="exp-letter">A</div>
-      <div class="exposition-question" id="exp-question">Pregunta cargando...</div>
-      <div class="exposition-answer" id="exp-answer">Respuesta</div>
-      <div class="exposition-explanation" id="exp-explanation">Explicación</div>
-    </div>
-
-    <div class="exposition-nav">
-      <button id="btn-exp-prev">← Anterior</button>
-      <button id="btn-exp-next">Siguiente →</button>
-    </div>
+    <p style="color: white; text-align: center;">📚 Modo Estudio activado</p>
   </div>
+</div>
+
+<div class="exposition-modal" id="exposition-modal" style="transform: translate(-50%, -50%) scale(0);">
+  <button class="close-modal" id="close-modal">✕</button>
+  <div class="modal-letter" id="modal-letter">A</div>
+  <div class="modal-question" id="modal-question">Pregunta</div>
+  <div class="modal-answer" id="modal-answer">RESPUESTA</div>
+  <div class="modal-explanation" id="modal-explanation">Explicación detallada</div>
 </div>
 
 <script>
@@ -600,9 +647,9 @@
   }
 
   function playSoundCorrect() {
-    playSound(523.25, 0.1); // C5
-    setTimeout(() => playSound(659.25, 0.1), 100); // E5
-    setTimeout(() => playSound(783.99, 0.2), 200); // G5
+    playSound(523.25, 0.1);
+    setTimeout(() => playSound(659.25, 0.1), 100);
+    setTimeout(() => playSound(783.99, 0.2), 200);
   }
 
   function playSoundIncorrect() {
@@ -614,7 +661,7 @@
     playSound(400, 0.05);
   }
 
-  // ========== ESTRELLAS PARPADEAN ==========
+  // ========== ESTRELLAS ==========
   function createStars() {
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 50; i++) {
@@ -627,180 +674,92 @@
     }
   }
 
-  // ========== CONFETTI ==========
-  function createConfetti() {
-    for (let i = 0; i < 50; i++) {
-      const confetti = document.createElement('div');
-      confetti.className = 'confetti';
-      confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.top = '-10px';
-      confetti.style.background = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FF69B4', '#00BFFF'][Math.floor(Math.random() * 5)];
-      confetti.style.animation = `confettiFall ${2 + Math.random()}s linear forwards`;
-      confetti.style.delay = Math.random() * 0.3 + 's';
-      document.body.appendChild(confetti);
+  // ========== CANES CORSO VOLADORES ==========
+  let caneInterval = null;
+
+  function createFlyingCanes() {
+    caneInterval = setInterval(() => {
+      const cane = document.createElement('div');
+      cane.className = 'flying-cane';
+      cane.textContent = '🐕';
+      cane.style.top = Math.random() * 80 + 10 + '%';
       
-      setTimeout(() => confetti.remove(), 3000);
+      if (Math.random() > 0.5) {
+        cane.classList.add('right');
+        cane.style.right = '-100px';
+      } else {
+        cane.style.left = '-100px';
+      }
+      
+      document.body.appendChild(cane);
+      setTimeout(() => cane.remove(), 6000);
+    }, 12000);
+  }
+
+  // ========== MEDUSAS FINALES ==========
+  function createJellyfishes() {
+    for (let i = 0; i < 100; i++) {
+      const jellyfish = document.createElement('div');
+      jellyfish.className = 'jellyfish';
+      jellyfish.textContent = '🪼';
+      jellyfish.style.left = Math.random() * 100 + 'vw';
+      jellyfish.style.top = Math.random() * 100 + 'vh';
+      jellyfish.style.filter = 'hue-rotate(270deg)';
+      jellyfish.style.animationDelay = Math.random() * 8 + 's';
+      jellyfish.style.animationDuration = (6 + Math.random() * 4) + 's';
+      document.body.appendChild(jellyfish);
+    }
+  }
+
+  // ========== PARTICULAS VERDES ==========
+  function createGreenParticles(x, y) {
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'green-particle';
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      
+      const angle = (i / 15) * Math.PI * 2;
+      const distance = 50 + Math.random() * 50;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+      
+      particle.style.setProperty('--tx', tx + 'px');
+      particle.style.animation = `particleFloat ${0.8 + Math.random() * 0.4}s ease-out forwards`;
+      
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1200);
     }
   }
 
   // ========== DATOS DE PREGUNTAS ==========
   const preguntas = {
-    'A': { 
-      pregunta: '¿Quién fue el padre del socialismo científico?', 
-      respuesta: 'MARX', 
-      respuestas_alt: ['Karl Marx', 'Karl'],
-      explicacion: 'Karl Marx fue un filósofo y economista alemán que revolucionó el pensamiento social al crear el concepto del socialismo científico, basado en el análisis material e histórico de la sociedad.'
-    },
-    'B': { 
-      pregunta: 'Viaje de 5 años en el que Darwin recopiló datos biológicos', 
-      respuesta: 'BEAGLE', 
-      respuestas_alt: ['HMS Beagle', 'Viaje del Beagle'],
-      explicacion: 'El viaje del HMS Beagle (1831-1836) fue fundamental para Darwin, permitiéndole recopilar especímenes y observaciones que sentarían las bases de su teoría de la evolución.'
-    },
-    'C': { 
-      pregunta: '¿Quién propuso la teoría de la "Ley de los tres estados"?', 
-      respuesta: 'COMTE', 
-      respuestas_alt: ['Auguste Comte', 'Auguste'],
-      explicacion: 'Auguste Comte dividió la evolución del conocimiento humano en tres estados: teológico, metafísico y positivo, cada uno representando un avance en el pensamiento racional.'
-    },
-    'D': { 
-      pregunta: '¿Qué sociólogo francés creó el concepto de "Hechos Sociales"?', 
-      respuesta: 'DURKHEIM', 
-      respuestas_alt: ['Émile Durkheim', 'Emile'],
-      explicacion: 'Émile Durkheim definió los hechos sociales como fenómenos colectivos que influyen en el comportamiento individual, sentando las bases de la sociología moderna.'
-    },
-    'E': { 
-      pregunta: 'Corriente filosófica creada por Comte basada en la observación', 
-      respuesta: 'EMPIRISMO', 
-      respuestas_alt: ['Positivismo', 'Empiricismo'],
-      explicacion: 'El positivismo de Comte enfatiza la importancia de la observación y la experiencia como base del conocimiento científico, rechazando las explicaciones puramente teóricas.'
-    },
-    'F': { 
-      pregunta: '¿En qué país nació Marx?', 
-      respuesta: 'FILOSOFIA', 
-      respuestas_alt: ['Alemania', 'Prusia', 'Tréveris', 'Francia'],
-      explicacion: 'Marx nació en Tréveris, Prusia (actualmente Alemania), en 1818. Su formación filosófica fue decisiva para su posterior desarrollo del materialismo histórico.'
-    },
-    'G': { 
-      pregunta: 'Islas donde Darwin observó variaciones en pinzones y tortugas', 
-      respuesta: 'GALAPAGOS', 
-      respuestas_alt: ['Galápagos', 'Islas Galápagos'],
-      explicacion: 'Las Islas Galápagos fueron cruciales para Darwin. Las variaciones que observó entre los pinzones de diferentes islas lo inspiraron a desarrollar su teoría de selección natural.'
-    },
-    'H': { 
-      pregunta: 'Profesor mentor de Darwin en la Universidad de Cambridge', 
-      respuesta: 'HENSLOW', 
-      respuestas_alt: ['John Henslow', 'Henslow'],
-      explicacion: 'John Stevens Henslow fue el maestro de Darwin en Cambridge, despertando en él la pasión por las ciencias naturales y preparándolo para el viaje del Beagle.'
-    },
-    'I': { 
-      pregunta: '¿En qué influyó profundamente el marxismo?', 
-      respuesta: 'IDEOLOGIA', 
-      respuestas_alt: ['Ideología', 'Ideologías', 'Política'],
-      explicacion: 'El marxismo transformó profundamente las ideologías políticas y sociales del mundo moderno, influyendo en movimientos revolucionarios y teorías sociales en todo el globo.'
-    },
-    'J': { 
-      pregunta: 'Darwin publicó un libro famoso sobre: "El origen del..."', 
-      respuesta: 'JUNGLA', 
-      respuestas_alt: ['especies', 'hombre', 'origen', 'vida'],
-      explicacion: 'La obra más importante de Darwin fue "El origen de las especies" (1859), donde presentó su teoría de la evolución por selección natural, revolucionando la biología.'
-    },
-    'K': { 
-      pregunta: '¿Cuál es el apellido del filósofo alemán creador del materialismo histórico?', 
-      respuesta: 'KARL', 
-      respuestas_alt: ['Marx', 'Marx Karl'],
-      explicacion: 'Karl Marx fue un pensador alemán cuyas teorías sobre la historia material transformaron el pensamiento político y social del mundo contemporáneo.'
-    },
-    'L': { 
-      pregunta: 'Concepto marxista fundamental sobre el conflicto entre clases sociales', 
-      respuesta: 'LUCHA', 
-      respuestas_alt: ['Lucha de clases', 'Conflicto'],
-      explicacion: 'La lucha de clases es el concepto central del marxismo, donde Marx propone que la historia es impulsada por los conflictos entre diferentes clases sociales económicamente definidas.'
-    },
-    'M': { 
-      pregunta: 'Teoría de Marx sobre el análisis de la historia y sociedad', 
-      respuesta: 'MATERIALISMO', 
-      respuestas_alt: ['Materialismo histórico', 'Materialismo'],
-      explicacion: 'El materialismo histórico de Marx sostiene que la base económica de una sociedad determina su estructura política e ideológica, rechazando explicaciones idealistas de la historia.'
-    },
-    'N': { 
-      pregunta: '¿Cuál fue la obra naturalista más importante de Darwin?', 
-      respuesta: 'NATURALISTA', 
-      respuestas_alt: ['El origen de las especies', 'Origen'],
-      explicacion: 'Darwin fue un naturalista cuya obra "El origen de las especies" revolucionó nuestra comprensión de la vida en la Tierra, proponiendo la evolución como mecanismo de cambio biológico.'
-    },
-    'O': { 
-      pregunta: 'Palabra clave en la filosofía de Comte: "Orden y..."', 
-      respuesta: 'ORDEN', 
-      respuestas_alt: ['Orden y Progreso', 'Progreso'],
-      explicacion: 'La divisa de Comte "Orden y Progreso" resume su visión de que la sociedad debe basarse en principios científicos para alcanzar el progreso mientras mantiene un orden estable.'
-    },
-    'P': { 
-      pregunta: '¿Corriente filosófica que busca conocimiento a través de la observación?', 
-      respuesta: 'POSITIVISMO', 
-      respuestas_alt: ['Positivismo'],
-      explicacion: 'El positivismo es la corriente filosófica creada por Comte que considera válido solo el conocimiento que puede ser verificado mediante la observación empírica y la experiencia.'
-    },
-    'Q': { 
-      pregunta: 'Marx criticaba los sistemas que buscaban..., generando explotación', 
-      respuesta: 'QUIMICA', 
-      respuestas_alt: ['química', 'capitalismo', 'dinero', 'ganancias'],
-      explicacion: 'Marx fue un crítico feroz del capitalismo, denunciando cómo el sistema económico genera explotación laboral y concentración de riqueza en manos de pocos propietarios.'
-    },
-    'R': { 
-      pregunta: 'Darwin realizó investigaciones de... durante su viaje', 
-      respuesta: 'RECOLECCION', 
-      respuestas_alt: ['recolección', 'observación', 'recogida'],
-      explicacion: 'Durante el viaje del Beagle, Darwin se dedicó a la recolección sistemática de especímenes biológicos y fósiles, registrando meticulosamente sus observaciones de la naturaleza.'
-    },
-    'S': { 
-      pregunta: 'Ideología política desarrollada a partir de las ideas de Marx', 
-      respuesta: 'SOCIALISMO', 
-      respuestas_alt: ['Comunismo', 'Socialista'],
-      explicacion: 'El socialismo es el sistema político y económico basado en las teorías marxistas, buscando eliminar la propiedad privada de los medios de producción y crear una sociedad más igualitaria.'
-    },
-    'T': { 
-      pregunta: 'Periodo histórico que estudiaban principalmente estos pensadores', 
-      respuesta: 'TRANSFORMACION', 
-      respuestas_alt: ['transformación', 'modernidad', 'transición'],
-      explicacion: 'Los grandes pensadores de la modernidad analizaban las transformaciones profundas que experimentaba la sociedad con la industrialización y el cambio científico.'
-    },
-    'U': { 
-      pregunta: '¿En qué universidad estudió Darwin biología y geología?', 
-      respuesta: 'UNIVERSIDAD', 
-      respuestas_alt: ['Cambridge', 'Cambridge University'],
-      explicacion: 'Darwin estudió en la Universidad de Cambridge, donde bajo la mentoría de John Henslow desarrolló su pasión por las ciencias naturales.'
-    },
-    'V': { 
-      pregunta: 'Aspecto fundamental de la teoría de Darwin: diferencias genéticas', 
-      respuesta: 'VARIABILIDAD', 
-      respuestas_alt: ['Variación', 'Variables', 'Variación genética'],
-      explicacion: 'La variabilidad es fundamental en la teoría de Darwin. Sin variación genética en las poblaciones, la selección natural no tendría material sobre el cual actuar.'
-    },
-    'W': { 
-      pregunta: 'Marx pasó años exiliado en Londres escribiendo sobre este concepto', 
-      respuesta: 'WORK', 
-      respuestas_alt: ['trabajo', 'obra'],
-      explicacion: 'Marx pasó gran parte de su vida en Londres, donde escribió extensamente sobre el trabajo, la explotación laboral y las contradicciones del capitalismo industrial.'
-    },
-    'X': { 
-      pregunta: 'Teoría que analiza relaciones complejas en la sociedad', 
-      respuesta: 'XENIAL', 
-      respuestas_alt: ['compleja', 'análisis'],
-      explicacion: 'Los pensadores modernos desarrollaron teorías complejas que analizan las múltiples dimensiones de la sociedad: económica, política, social y cultural.'
-    },
-    'Y': { 
-      pregunta: '¿A partir de qué se desarrolló el pensamiento moderno?', 
-      respuesta: 'YACIMIENTOS', 
-      respuestas_alt: ['humanismo'],
-      explicacion: 'El pensamiento moderno se desarrolló a partir del Renacimiento y la Ilustración, valorando la razón, la observación empírica y el análisis crítico de la realidad.'
-    },
-    'Z': { 
-      pregunta: 'Las Galápagos se ubicaban en la... tropical ecuatorial', 
-      respuesta: 'ZONA', 
-      respuestas_alt: ['zona', 'ecuatorial'],
-      explicacion: 'Las Islas Galápagos están ubicadas en la zona ecuatorial del Océano Pacífico, lo que proporciona un ambiente único con biodiversidad característica de regiones tropicales.'
-    }
+    'A': { pregunta: '¿Quién fue el padre del socialismo científico?', respuesta: 'MARX', respuestas_alt: ['Karl Marx', 'Karl', 'Marx'], explicacion: 'Karl Marx fue un filósofo y economista alemán que revolucionó el pensamiento social al crear el concepto del socialismo científico, basado en el análisis material e histórico de la sociedad.' },
+    'B': { pregunta: 'Viaje de 5 años en el que Darwin recopiló datos biológicos', respuesta: 'BEAGLE', respuestas_alt: ['HMS Beagle', 'Viaje del Beagle', 'HMS', 'Beagle'], explicacion: 'El viaje del HMS Beagle (1831-1836) fue fundamental para Darwin, permitiéndole recopilar especímenes y observaciones que sentarían las bases de su teoría de la evolución.' },
+    'C': { pregunta: '¿Quién propuso la teoría de la "Ley de los tres estados"?', respuesta: 'COMTE', respuestas_alt: ['Auguste Comte', 'Auguste', 'Comte'], explicacion: 'Auguste Comte dividió la evolución del conocimiento humano en tres estados: teológico, metafísico y positivo, cada uno representando un avance en el pensamiento racional.' },
+    'D': { pregunta: '¿Qué sociólogo francés creó el concepto de "Hechos Sociales"?', respuesta: 'DURKHEIM', respuestas_alt: ['Émile Durkheim', 'Emile', 'Durkheim'], explicacion: 'Émile Durkheim definió los hechos sociales como fenómenos colectivos que influyen en el comportamiento individual, sentando las bases de la sociología moderna.' },
+    'E': { pregunta: 'Corriente filosófica creada por Comte basada en la observación', respuesta: 'EMPIRISMO', respuestas_alt: ['Positivismo', 'Empiricismo'], explicacion: 'El positivismo de Comte enfatiza la importancia de la observación y la experiencia como base del conocimiento científico, rechazando las explicaciones puramente teóricas.' },
+    'F': { pregunta: '¿En qué país nació Marx?', respuesta: 'FILOSOFIA', respuestas_alt: ['Alemania', 'Prusia', 'Tréveris', 'Francia', 'Alemania'], explicacion: 'Marx nació en Tréveris, Prusia (actualmente Alemania), en 1818. Su formación filosófica fue decisiva para su posterior desarrollo del materialismo histórico.' },
+    'G': { pregunta: 'Islas donde Darwin observó variaciones en pinzones y tortugas', respuesta: 'GALAPAGOS', respuestas_alt: ['Galápagos', 'Islas Galápagos', 'Galápagos'], explicacion: 'Las Islas Galápagos fueron cruciales para Darwin. Las variaciones que observó entre los pinzones de diferentes islas lo inspiraron a desarrollar su teoría de selección natural.' },
+    'H': { pregunta: 'Profesor mentor de Darwin en la Universidad de Cambridge', respuesta: 'HENSLOW', respuestas_alt: ['John Henslow', 'Henslow'], explicacion: 'John Stevens Henslow fue el maestro de Darwin en Cambridge, despertando en él la pasión por las ciencias naturales y preparándolo para el viaje del Beagle.' },
+    'I': { pregunta: '¿En qué influyó profundamente el marxismo?', respuesta: 'IDEOLOGIA', respuestas_alt: ['Ideología', 'Ideologías', 'Política'], explicacion: 'El marxismo transformó profundamente las ideologías políticas y sociales del mundo moderno, influyendo en movimientos revolucionarios y teorías sociales en todo el globo.' },
+    'J': { pregunta: 'Darwin publicó un libro famoso sobre: "El origen del..."', respuesta: 'JUNGLA', respuestas_alt: ['especies', 'hombre', 'origen', 'vida'], explicacion: 'La obra más importante de Darwin fue "El origen de las especies" (1859), donde presentó su teoría de la evolución por selección natural, revolucionando la biología.' },
+    'K': { pregunta: '¿Cuál es el apellido del filósofo alemán creador del materialismo histórico?', respuesta: 'KARL', respuestas_alt: ['Marx', 'Marx Karl'], explicacion: 'Karl Marx fue un pensador alemán cuyas teorías sobre la historia material transformaron el pensamiento político y social del mundo contemporáneo.' },
+    'L': { pregunta: 'Concepto marxista fundamental sobre el conflicto entre clases sociales', respuesta: 'LUCHA', respuestas_alt: ['Lucha de clases', 'Conflicto'], explicacion: 'La lucha de clases es el concepto central del marxismo, donde Marx propone que la historia es impulsada por los conflictos entre diferentes clases sociales económicamente definidas.' },
+    'M': { pregunta: 'Teoría de Marx sobre el análisis de la historia y sociedad', respuesta: 'MATERIALISMO', respuestas_alt: ['Materialismo histórico', 'Materialismo'], explicacion: 'El materialismo histórico de Marx sostiene que la base económica de una sociedad determina su estructura política e ideológica, rechazando explicaciones idealistas de la historia.' },
+    'N': { pregunta: '¿Cuál fue la obra naturalista más importante de Darwin?', respuesta: 'NATURALISTA', respuestas_alt: ['El origen de las especies', 'Origen'], explicacion: 'Darwin fue un naturalista cuya obra "El origen de las especies" revolucionó nuestra comprensión de la vida en la Tierra, proponiendo la evolución como mecanismo de cambio biológico.' },
+    'O': { pregunta: 'Palabra clave en la filosofía de Comte: "Orden y..."', respuesta: 'ORDEN', respuestas_alt: ['Orden y Progreso', 'Progreso'], explicacion: 'La divisa de Comte "Orden y Progreso" resume su visión de que la sociedad debe basarse en principios científicos para alcanzar el progreso mientras mantiene un orden estable.' },
+    'P': { pregunta: '¿Corriente filosófica que busca conocimiento a través de la observación?', respuesta: 'POSITIVISMO', respuestas_alt: ['Positivismo'], explicacion: 'El positivismo es la corriente filosófica creada por Comte que considera válido solo el conocimiento que puede ser verificado mediante la observación empírica y la experiencia.' },
+    'Q': { pregunta: 'Marx criticaba los sistemas que buscaban..., generando explotación', respuesta: 'QUIMICA', respuestas_alt: ['química', 'capitalismo', 'dinero', 'ganancias'], explicacion: 'Marx fue un crítico feroz del capitalismo, denunciando cómo el sistema económico genera explotación laboral y concentración de riqueza en manos de pocos propietarios.' },
+    'R': { pregunta: 'Darwin realizó investigaciones de... durante su viaje', respuesta: 'RECOLECCION', respuestas_alt: ['recolección', 'observación', 'recogida', 'coleccion'], explicacion: 'Durante el viaje del Beagle, Darwin se dedicó a la recolección sistemática de especímenes biológicos y fósiles, registrando meticulosamente sus observaciones de la naturaleza.' },
+    'S': { pregunta: 'Ideología política desarrollada a partir de las ideas de Marx', respuesta: 'SOCIALISMO', respuestas_alt: ['Comunismo', 'Socialista'], explicacion: 'El socialismo es el sistema político y económico basado en las teorías marxistas, buscando eliminar la propiedad privada de los medios de producción y crear una sociedad más igualitaria.' },
+    'T': { pregunta: 'Periodo histórico que estudiaban principalmente estos pensadores', respuesta: 'TRANSFORMACION', respuestas_alt: ['transformación', 'modernidad', 'transición'], explicacion: 'Los grandes pensadores de la modernidad analizaban las transformaciones profundas que experimentaba la sociedad con la industrialización y el cambio científico.' },
+    'U': { pregunta: '¿En qué universidad estudió Darwin biología y geología?', respuesta: 'UNIVERSIDAD', respuestas_alt: ['Cambridge', 'Cambridge University'], explicacion: 'Darwin estudió en la Universidad de Cambridge, donde bajo la mentoría de John Henslow desarrolló su pasión por las ciencias naturales.' },
+    'V': { pregunta: 'Aspecto fundamental de la teoría de Darwin: diferencias genéticas', respuesta: 'VARIABILIDAD', respuestas_alt: ['Variación', 'Variables', 'Variacion genetica'], explicacion: 'La variabilidad es fundamental en la teoría de Darwin. Sin variación genética en las poblaciones, la selección natural no tendría material sobre el cual actuar.' },
+    'W': { pregunta: 'Marx pasó años exiliado en Londres escribiendo sobre este concepto', respuesta: 'WORK', respuestas_alt: ['trabajo', 'obra'], explicacion: 'Marx pasó gran parte de su vida en Londres, donde escribió extensamente sobre el trabajo, la explotación laboral y las contradicciones del capitalismo industrial.' },
+    'X': { pregunta: 'Teoría que analiza relaciones complejas en la sociedad', respuesta: 'XENIAL', respuestas_alt: ['compleja', 'analisis'], explicacion: 'Los pensadores modernos desarrollaron teorías complejas que analizan las múltiples dimensiones de la sociedad: económica, política, social y cultural.' },
+    'Y': { pregunta: '¿A partir de qué se desarrolló el pensamiento moderno?', respuesta: 'YACIMIENTOS', respuestas_alt: ['humanismo'], explicacion: 'El pensamiento moderno se desarrolló a partir del Renacimiento y la Ilustración, valorando la razón, la observación empírica y el análisis crítico de la realidad.' },
+    'Z': { pregunta: 'Las Galápagos se ubicaban en la... tropical ecuatorial', respuesta: 'ZONA', respuestas_alt: ['zona', 'ecuatorial'], explicacion: 'Las Islas Galápagos están ubicadas en la zona ecuatorial del Océano Pacífico, lo que proporciona un ambiente único con biodiversidad característica de regiones tropicales.' }
   };
 
   const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -809,20 +768,22 @@
   let totalPreguntas = 0;
   let intentosActual = 0;
   let respondida = false;
-  let modoExposicion = false;
   let letrasResueltas = new Set();
   let elementosLetras = {};
+  let modalTimeout = null;
+
+  function normalizarRespuesta(texto) {
+    return texto.toUpperCase().trim().replace(/á|à|ä/g, 'a').replace(/é|è|ë/g, 'e').replace(/í|ì|ï/g, 'i').replace(/ó|ò|ö/g, 'o').replace(/ú|ù|ü/g, 'u');
+  }
 
   function dibujarRosco() {
     const svg = document.getElementById('letters');
     const radio = 150;
-    const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA502', '#2ECC71', '#9B59B6'];
 
     letras.forEach((letra, i) => {
       const angulo = (i / 26) * Math.PI * 2 - Math.PI / 2;
       const x = 200 + radio * Math.cos(angulo);
       const y = 200 + radio * Math.sin(angulo);
-      const color = colores[i % colores.length];
 
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.style.cursor = 'pointer';
@@ -832,8 +793,8 @@
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
       circle.setAttribute('r', 26);
-      circle.setAttribute('fill', color);
-      circle.setAttribute('stroke', 'white');
+      circle.setAttribute('fill', '#cccccc');
+      circle.setAttribute('stroke', '#999999');
       circle.setAttribute('stroke-width', '2');
       circle.setAttribute('filter', 'url(#shadow)');
       
@@ -842,8 +803,8 @@
       text.setAttribute('y', y + 8);
       text.setAttribute('text-anchor', 'middle');
       text.setAttribute('font-size', '20');
-      text.setAttribute('font-weight', '900');
-      text.setAttribute('fill', 'white');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('fill', '#666666');
       text.textContent = letra;
 
       g.appendChild(circle);
@@ -860,8 +821,10 @@
 
   function iluminarLetra(letra) {
     if (elementosLetras[letra]) {
+      const circle = elementosLetras[letra].querySelector('circle');
+      const rect = circle.getBoundingClientRect();
+      createGreenParticles(rect.x + rect.width / 2, rect.y + rect.height / 2);
       elementosLetras[letra].classList.add('solved');
-      createConfetti();
     }
   }
 
@@ -869,9 +832,7 @@
     letraActual = indice;
     const letra = letras[indice];
     
-    if (letrasResueltas.has(letra)) {
-      return;
-    }
+    if (letrasResueltas.has(letra)) return;
     
     respondida = false;
     intentosActual = 0;
@@ -892,8 +853,26 @@
     document.getElementById('intento-counter').textContent = '';
   }
 
-  function normalizarRespuesta(texto) {
-    return texto.toUpperCase().trim();
+  function mostrarModalEstudio() {
+    const letra = letras[letraActual];
+    const datos = preguntas[letra];
+    
+    document.getElementById('modal-letter').textContent = letra;
+    document.getElementById('modal-question').textContent = datos.pregunta;
+    document.getElementById('modal-answer').textContent = datos.respuesta;
+    document.getElementById('modal-explanation').textContent = datos.explicacion;
+    
+    const modal = document.getElementById('exposition-modal');
+    modal.classList.remove('hide');
+    modal.style.transform = 'translate(-50%, -50%) scale(1)';
+  }
+
+  function cerrarModalEstudio() {
+    const modal = document.getElementById('exposition-modal');
+    modal.classList.add('hide');
+    setTimeout(() => {
+      modal.style.transform = 'translate(-50%, -50%) scale(0)';
+    }, 400);
   }
 
   function comprobarRespuesta() {
@@ -920,6 +899,25 @@
       playSoundCorrect();
       mostrarFeedback(true, `🎉 ¡CORRECTO! ${datos.respuesta} (Intento ${intentosActual})`);
       document.getElementById('answer-input').disabled = true;
+      
+      // Mostrar modal después de 4 segundos
+      if (modalTimeout) clearTimeout(modalTimeout);
+      modalTimeout = setTimeout(mostrarModalEstudio, 4000);
+      
+      // Cerrar modal después de 12 segundos
+      setTimeout(() => cerrarModalEstudio(), 16000);
+      
+      // Verificar si es el último
+      if (aciertos === 26) {
+        setTimeout(() => {
+          const finalMsg = document.createElement('div');
+          finalMsg.className = 'final-message';
+          finalMsg.textContent = '¡🎊 ¡FELICIDADES! ¡COMPLETASTE EL ROSCO! 🎊';
+          document.body.appendChild(finalMsg);
+          setTimeout(() => createJellyfishes(), 500);
+          setTimeout(() => finalMsg.remove(), 4000);
+        }, 16500);
+      }
     } else {
       playSoundIncorrect();
       mostrarFeedback(false, `❌ Incorrecto. Intenta de nuevo (Intento ${intentosActual})`);
@@ -955,52 +953,6 @@
     document.getElementById('score-display').textContent = `🎯 Aciertos: ${aciertos} / ${totalPreguntas}`;
   }
 
-  function cambiarModo(nuevo_modo) {
-    modoExposicion = nuevo_modo;
-    
-    const btnJuego = document.getElementById('btn-modo-juego');
-    const btnExpo = document.getElementById('btn-modo-exposicion');
-    const seccionJuego = document.getElementById('interactive-section');
-    const seccionExpo = document.getElementById('exposition-section');
-    
-    if (modoExposicion) {
-      btnJuego.classList.remove('active');
-      btnExpo.classList.add('active');
-      seccionJuego.classList.add('hidden');
-      seccionExpo.classList.add('active');
-      mostrarExposicion(0);
-    } else {
-      btnJuego.classList.add('active');
-      btnExpo.classList.remove('active');
-      seccionJuego.classList.remove('hidden');
-      seccionExpo.classList.remove('active');
-    }
-  }
-
-  function mostrarExposicion(indice) {
-    letraActual = indice;
-    const letra = letras[indice];
-    const datos = preguntas[letra];
-    const progreso = ((indice + 1) / 26) * 100;
-    
-    document.getElementById('exp-letter').textContent = letra;
-    document.getElementById('exp-question').textContent = datos.pregunta;
-    document.getElementById('exp-answer').textContent = datos.respuesta;
-    document.getElementById('exp-explanation').textContent = datos.explicacion;
-    document.getElementById('progress-fill').style.width = progreso + '%';
-    
-    document.getElementById('btn-exp-prev').disabled = indice === 0;
-    document.getElementById('btn-exp-next').disabled = indice === 25;
-  }
-
-  function exposicionAnterior() {
-    if (letraActual > 0) mostrarExposicion(letraActual - 1);
-  }
-
-  function exposicionSiguiente() {
-    if (letraActual < 25) mostrarExposicion(letraActual + 1);
-  }
-
   // Event Listeners
   document.getElementById('btn-check').addEventListener('click', comprobarRespuesta);
   document.getElementById('btn-skip').addEventListener('click', saltarPregunta);
@@ -1008,12 +960,8 @@
     if (e.key === 'Enter' && !respondida) comprobarRespuesta();
   });
 
-  document.getElementById('btn-modo-juego').addEventListener('click', () => cambiarModo(false));
-  document.getElementById('btn-modo-exposicion').addEventListener('click', () => cambiarModo(true));
-  document.getElementById('btn-exp-prev').addEventListener('click', exposicionAnterior);
-  document.getElementById('btn-exp-next').addEventListener('click', exposicionSiguiente);
+  document.getElementById('close-modal').addEventListener('click', cerrarModalEstudio);
 
-  // Sound Toggle
   document.getElementById('sound-toggle').addEventListener('click', function() {
     soundEnabled = !soundEnabled;
     this.classList.toggle('muted');
@@ -1022,6 +970,7 @@
 
   // Initialize
   createStars();
+  createFlyingCanes();
   dibujarRosco();
 </script>
 
