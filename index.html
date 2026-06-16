@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Rosco Épico - Grandes Pensadores</title>
+  <title>🎯 Rosco Épico - Grandes Pensadores (A-Z)</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
 
-    * { box-sizing: border-box; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
     
     body { 
-      margin: 0; 
-      padding: 0.8rem; 
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
       background-size: 400% 400%;
       animation: gradient 15s ease infinite;
       min-height: 100vh;
-      overflow: hidden;
-      width: 100vw;
-      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     @keyframes gradient {
@@ -53,910 +56,893 @@
       50% { opacity: 1; }
     }
 
-    .flying-cane {
-      position: fixed;
-      width: 140px;
-      height: 100px;
-      top: 50%;
-      transform: translateY(-50%);
-      animation: flyAcross 5s linear infinite;
-      z-index: 2;
-      opacity: 0.8;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150"><defs><linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%25" style="stop-color:%23555555;stop-opacity:1" /><stop offset="100%25" style="stop-color:%23333333;stop-opacity:1" /></linearGradient></defs><g><ellipse cx="80" cy="70" rx="55" ry="50" fill="url(%23skinGrad)" stroke="%23222222" stroke-width="2"/><circle cx="60" cy="50" r="12" fill="%23111111"/><circle cx="58" cy="50" r="6" fill="%23cccccc"/><circle cx="105" cy="50" r="12" fill="%23111111"/><circle cx="103" cy="50" r="6" fill="%23cccccc"/><ellipse cx="80" cy="75" rx="18" ry="15" fill="%23444444"/><rect x="60" y="85" width="40" height="25" rx="10" fill="%23666666" stroke="%23222222" stroke-width="1"/><ellipse cx="70" cy="115" rx="8" ry="12" fill="%23555555"/><ellipse cx="90" cy="115" rx="8" ry="12" fill="%23555555"/><ellipse cx="50" cy="75" rx="12" ry="20" fill="%23444444"/><ellipse cx="110" cy="75" rx="12" ry="20" fill="%23444444"/></g></svg>');
-    }
-
-    .flying-cane.right {
-      animation: flyAcrossRight 5s linear infinite;
-      transform: translateY(-50%) scaleX(-1);
-    }
-
-    @keyframes flyAcross {
-      0% { left: -150px; }
-      100% { left: 100vw; }
-    }
-
-    @keyframes flyAcrossRight {
-      0% { right: -150px; }
-      100% { right: 100vw; }
-    }
-
-    .jellyfish {
-      position: fixed;
-      font-size: 50px;
-      animation: jellyFloat 8s infinite ease-in-out;
-      z-index: 2;
-      filter: hue-rotate(270deg) saturate(1.5);
-      opacity: 0.7;
-    }
-
-    @keyframes jellyFloat {
-      0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-      50% { transform: translateY(-150px) translateX(50px) rotate(20deg); }
-    }
-
-    .titulo {
+    .container {
       position: relative;
-      z-index: 1;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: white;
-    }
-
-    .titulo h1 {
-      margin: 0;
-      font-size: 40px;
-      font-weight: 900;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .titulo p {
-      margin: 0.3rem 0 0 0;
-      font-size: 13px;
-      color: rgba(255,255,255,0.8);
-      font-weight: 300;
-      animation: fadeIn 1.2s ease;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .controls-top {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .mode-button {
-      padding: 8px 20px;
-      font-size: 13px;
-      border: 2px solid white;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    
-    .mode-button:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
-    }
-    
-    .mode-button.active {
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: white;
-      border-color: #2ecc71;
-      transform: scale(1.03);
-      box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
-    }
-
-    .rosco-container { 
+      z-index: 10;
+      background: rgba(26, 26, 46, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      max-width: 1100px;
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-      display: flex; 
-      flex-direction: column; 
-      gap: 1.2rem;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(83, 52, 131, 0.6);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #00d4ff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    .header p {
+      color: #a0a0a0;
+      font-size: 1.1em;
+    }
+
+    .rosco-container {
       position: relative;
-      z-index: 1;
-      height: calc(100vh - 120px);
-      overflow-y: auto;
+      width: 600px;
+      height: 600px;
+      margin: 0 auto 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .rosco-circle {
-      width: 100%;
-      max-width: 380px;
-      aspect-ratio: 1;
       position: relative;
-      margin: 0 auto;
-    }
-    
-    .rosco-svg {
       width: 100%;
       height: 100%;
-      cursor: pointer;
-      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
-      animation: float 3s ease-in-out infinite;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .question-box {
-      background: rgba(255,255,255,0.95);
-      border: 2px solid rgba(255,255,255,0.5);
-      border-radius: 18px;
-      padding: 1.5rem;
-      min-height: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    
-    .question-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #2ecc71;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .letter-badge {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 28px;
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .question-text {
-      font-size: 16px;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-      font-weight: 500;
-    }
-    
-    .input-group {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 0.8rem;
-    }
-    
-    .answer-input {
-      flex: 1;
-      padding: 10px 14px;
-      font-size: 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-family: inherit;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-    
-    .answer-input:focus {
-      outline: none;
-      border-color: #2ecc71;
-      box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
-      transform: scale(1.01);
-    }
-    
-    .answer-input:disabled {
-      background: #f5f5f5;
-      color: #999;
-      cursor: not-allowed;
-    }
-    
-    .button-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 0.8rem;
-    }
-    
-    .button-group button {
-      padding: 10px;
-      font-size: 13px;
-      border: 2px solid transparent;
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-    }
-    
-    .button-group button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.4);
-    }
-    
-    .button-group button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    
-    .feedback {
-      margin-top: 0.8rem;
-      padding: 0.8rem;
-      border-radius: 10px;
-      font-size: 13px;
-      text-align: center;
-      font-weight: 600;
-      animation: slideUp 0.4s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .feedback.correct {
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: white;
-    }
-
-    .feedback.incorrect {
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      color: white;
-    }
-
-    .score-display {
-      font-size: 14px;
-      color: white;
-      text-align: center;
-      padding: 0.8rem;
-      background: linear-gradient(135deg, rgba(46,204,113,0.8), rgba(39,174,96,0.8));
-      border-radius: 10px;
-      font-weight: 700;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .intento-counter {
-      font-size: 12px;
-      color: #e74c3c;
-      margin-top: 0.5rem;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .exposition-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-      border-radius: 22px;
-      padding: 2rem;
-      max-width: 450px;
-      width: 90%;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-      z-index: 1000;
-      animation: modalAppear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255,255,255,0.5);
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    @keyframes modalAppear {
-      to { transform: translate(-50%, -50%) scale(1); }
-    }
-
-    @keyframes modalDisappear {
-      to { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    }
-
-    .exposition-modal.hide {
-      animation: modalDisappear 0.4s ease forwards;
-    }
-
-    .close-modal {
+    .rosco-letter {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-      transition: all 0.3s;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .close-modal:hover {
-      transform: scale(1.1) rotate(90deg);
-    }
-
-    .modal-letter {
-      font-size: 42px;
-      font-weight: 900;
-      color: #2ecc71;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 3px solid #2ecc71;
-    }
-
-    .modal-question {
-      font-size: 15px;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    .modal-answer {
-      font-size: 22px;
-      font-weight: 900;
-      color: #2ecc71;
-      padding: 1rem;
-      background-color: rgba(46,204,113,0.1);
-      border-radius: 10px;
-      margin-bottom: 1.2rem;
-      border-left: 4px solid #2ecc71;
-    }
-
-    .modal-explanation {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #34495e;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    .exposition-mode {
-      display: none;
-    }
-
-    .exposition-mode.active {
-      display: block;
-    }
-
-    .interactive-mode {
-      display: block;
-    }
-
-    .interactive-mode.hidden {
-      display: none;
-    }
-
-    .letter-circle {
+      background: linear-gradient(135deg, #533483, #0f3460);
+      border: 2px solid #00d4ff;
+      border-radius: 50%;
+      cursor: pointer;
       transition: all 0.3s ease;
-    }
-
-    .letter-circle circle {
-      fill: #cccccc;
-      transition: all 0.4s ease;
-      stroke: #999999;
-    }
-
-    .letter-circle text {
-      fill: #666666;
-      font-weight: 700;
-      transition: all 0.4s ease;
-    }
-
-    .letter-circle:hover circle:not(.solved circle) {
-      filter: brightness(1.15);
-      cursor: pointer;
-    }
-
-    .letter-circle.solved circle {
-      fill: #2ecc71 !important;
-      stroke: #27ae60 !important;
-      filter: drop-shadow(0 0 12px rgba(46, 204, 113, 0.7));
-    }
-
-    .letter-circle.solved text {
-      fill: white !important;
+      font-size: 1.8em;
       font-weight: 900;
-    }
-
-    .green-particle {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: #2ecc71;
-      border-radius: 50%;
-      pointer-events: none;
-      box-shadow: 0 0 8px rgba(46, 204, 113, 0.8);
-    }
-
-    @keyframes particleFloat {
-      to { transform: translateY(-150px) translateX(var(--tx)) rotateZ(360deg); opacity: 0; }
-    }
-
-    .sound-toggle {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: all 0.3s;
-      z-index: 100;
-    }
-
-    .sound-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    }
-
-    .final-message {
-      position: fixed;
+      color: #00d4ff;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
+    }
+
+    .rosco-letter:hover:not(.used):not(.incorrect) {
+      background: linear-gradient(135deg, #00d4ff, #533483);
+      color: #1a1a2e;
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+
+    .rosco-letter.used {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      border-color: #4ade80;
       color: white;
-      padding: 2.5rem;
-      border-radius: 22px;
+      cursor: not-allowed;
+    }
+
+    .rosco-letter.incorrect {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      border-color: #ef4444;
+      color: white;
+      cursor: not-allowed;
+    }
+
+    .rosco-letter.skip {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border-color: #f59e0b;
+      color: white;
+      cursor: not-allowed;
+    }
+
+    .game-info {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .info-item {
       text-align: center;
-      z-index: 999;
-      font-size: 28px;
+      color: #00d4ff;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .info-label {
+      font-size: 0.9em;
+      color: #a0a0a0;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #00d4ff;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      border: 2px solid #00d4ff;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .modal-letter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #00d4ff, #533483);
+      border-radius: 50%;
+      font-size: 3em;
       font-weight: 900;
-      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      color: white;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
     }
 
-    ::-webkit-scrollbar {
-      width: 6px;
+    .modal-title {
+      color: #00d4ff;
+      font-size: 1.3em;
+      font-weight: 700;
     }
 
-    ::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
+    .question-text {
+      color: #e0e0e0;
+      font-size: 1.2em;
+      margin: 25px 0;
+      line-height: 1.6;
+      padding: 20px;
+      background: rgba(0, 212, 255, 0.05);
+      border-left: 4px solid #00d4ff;
+      border-radius: 8px;
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: rgba(46,204,113,0.6);
-      border-radius: 3px;
+    .answer-hint {
+      color: #a0a0a0;
+      font-size: 0.95em;
+      margin: 15px 0;
+      padding: 12px 15px;
+      background: rgba(245, 158, 11, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid #f59e0b;
+    }
+
+    .answer-hint strong {
+      color: #f59e0b;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .answer-input {
+      flex: 1;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #00d4ff;
+      border-radius: 8px;
+      color: #00d4ff;
+      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .answer-input:focus {
+      outline: none;
+      background: rgba(0, 212, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    }
+
+    .answer-input::placeholder {
+      color: #666;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 25px;
+      font-size: 1.1em;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #00d4ff, #0fa0d9);
+      color: #1a1a2e;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-skip {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+
+    .btn-skip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+    }
+
+    .result-message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+
+    .result-message.success {
+      background: rgba(74, 222, 128, 0.2);
+      color: #4ade80;
+      border: 2px solid #4ade80;
+      display: block;
+    }
+
+    .result-message.error {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 2px solid #ef4444;
+      display: block;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .stats {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .stats h3 {
+      color: #00d4ff;
+      margin-bottom: 15px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00d4ff, #4ade80);
+      transition: width 0.3s ease;
+    }
+
+    .completion-message {
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(74, 222, 128, 0.2);
+      border: 2px solid #4ade80;
+      border-radius: 10px;
+      color: #4ade80;
+      font-size: 1.2em;
+      font-weight: 700;
+      display: none;
+    }
+
+    .completion-message.show {
+      display: block;
+      animation: pulse 0.5s ease;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @media (max-width: 1024px) {
+      .rosco-container {
+        width: 500px;
+        height: 500px;
+      }
+
+      .rosco-letter {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+      }
+
+      .container {
+        padding: 25px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.6em;
+      }
+
+      .rosco-container {
+        width: 380px;
+        height: 380px;
+        margin: 0 auto 30px;
+      }
+
+      .rosco-letter {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2em;
+      }
+
+      .game-info {
+        padding: 15px;
+        gap: 10px;
+      }
+
+      .info-value {
+        font-size: 1.4em;
+      }
+
+      .modal-content {
+        padding: 25px;
+        width: 95%;
+      }
+
+      .modal-letter {
+        width: 60px;
+        height: 60px;
+        font-size: 2em;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="stars" id="starsContainer"></div>
 
-<div class="stars" id="stars"></div>
-
-<div class="titulo">
-  <h1>🎯 ROSCO ÉPICO</h1>
-  <p>Grandes Pensadores de la Modernidad</p>
-</div>
-
-<div class="controls-top">
-  <button class="mode-button active" id="btn-modo-juego">🎮 Juego</button>
-  <button class="mode-button" id="btn-modo-exposicion">📚 Estudio</button>
-</div>
-
-<button class="sound-toggle" id="sound-toggle">🔊</button>
-
-<div class="rosco-container">
-  <div class="interactive-mode" id="interactive-section">
-    <div class="rosco-circle">
-      <svg class="rosco-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="shadow">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
-          </filter>
-        </defs>
-        
-        <circle cx="200" cy="200" r="65" fill="#666666" stroke="white" stroke-width="3" filter="url(#shadow)"/>
-        <text x="200" y="215" text-anchor="middle" font-size="40" font-weight="900" fill="white" id="center-letter">A</text>
-        
-        <g id="letters"></g>
-      </svg>
+  <div class="container">
+    <div class="header">
+      <h1>🎯 Rosco Épico</h1>
+      <p>Grandes Pensadores a través de la Historia (A-Z)</p>
     </div>
-    
-    <div class="question-box">
-      <div>
-        <div class="question-title" id="question-title">
-          <span class="letter-badge" id="letter-badge">A</span>
-          <span id="question-label">Pregunta</span>
-        </div>
-        <div class="question-text" id="question-text">Haz clic en una letra para comenzar</div>
+
+    <div class="game-info">
+      <div class="info-item">
+        <div class="info-label">Acertadas</div>
+        <div class="info-value" id="correctCount">0/26</div>
       </div>
-      
-      <div>
-        <div class="input-group">
-          <input type="text" class="answer-input" id="answer-input" placeholder="Tu respuesta...">
-        </div>
-        <div class="button-group">
-          <button id="btn-check">✓ Comprobar</button>
-          <button id="btn-skip">⊘ Saltar</button>
-        </div>
-        <div id="feedback"></div>
-        <div class="intento-counter" id="intento-counter"></div>
-        <div class="score-display" id="score-display">🎯 Aciertos: 0 / 0</div>
+      <div class="info-item">
+        <div class="info-label">Saltadas</div>
+        <div class="info-value" id="skippedCount">0</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Errores</div>
+        <div class="info-value" id="errorCount">0</div>
+      </div>
+    </div>
+
+    <div class="rosco-container">
+      <div class="rosco-circle" id="roscoCircle"></div>
+    </div>
+
+    <div class="stats">
+      <h3>Progreso General</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+      </div>
+      <div class="completion-message" id="completionMessage">
+        🎉 ¡Felicitaciones! ¡Completaste el Rosco!
       </div>
     </div>
   </div>
-</div>
 
-<div class="exposition-modal" id="exposition-modal">
-  <button class="close-modal" id="close-modal">✕</button>
-  <div class="modal-letter" id="modal-letter">A</div>
-  <div class="modal-question" id="modal-question">Pregunta</div>
-  <div class="modal-answer" id="modal-answer">RESPUESTA</div>
-  <div class="modal-explanation" id="modal-explanation">Explicación</div>
-</div>
-
-<script>
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  let soundEnabled = true;
-
-  function playSound(frequency, duration, type = 'sine') {
-    if (!soundEnabled) return;
-    const osc = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    osc.connect(gain);
-    gain.connect(audioContext.destination);
-    osc.frequency.value = frequency;
-    osc.type = type;
-    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-    osc.start(audioContext.currentTime);
-    osc.stop(audioContext.currentTime + duration);
-  }
-
-  function playSoundCorrect() {
-    playSound(523.25, 0.1);
-    setTimeout(() => playSound(659.25, 0.1), 100);
-    setTimeout(() => playSound(783.99, 0.2), 200);
-  }
-
-  function playSoundIncorrect() {
-    playSound(200, 0.1);
-    setTimeout(() => playSound(150, 0.2), 100);
-  }
-
-  function playSoundClick() {
-    playSound(400, 0.05);
-  }
-
-  function createStars() {
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 3 + 's';
-      starsContainer.appendChild(star);
-    }
-  }
-
-  function createFlyingCanes() {
-    setInterval(() => {
-      const cane1 = document.createElement('div');
-      cane1.className = 'flying-cane';
-      cane1.style.top = Math.random() * 60 + 20 + '%';
-      cane1.style.left = '-150px';
-      document.body.appendChild(cane1);
-
-      const cane2 = document.createElement('div');
-      cane2.className = 'flying-cane right';
-      cane2.style.top = Math.random() * 60 + 20 + '%';
-      cane2.style.right = '-150px';
-      document.body.appendChild(cane2);
-
-      setTimeout(() => {
-        cane1.remove();
-        cane2.remove();
-      }, 5000);
-    }, 12000);
-  }
-
-  function createJellyfishes() {
-    for (let i = 0; i < 100; i++) {
-      const jellyfish = document.createElement('div');
-      jellyfish.className = 'jellyfish';
-      jellyfish.textContent = '🪼';
-      jellyfish.style.left = Math.random() * 100 + 'vw';
-      jellyfish.style.top = Math.random() * 100 + 'vh';
-      jellyfish.style.animationDelay = Math.random() * 8 + 's';
-      jellyfish.style.animationDuration = (6 + Math.random() * 4) + 's';
-      document.body.appendChild(jellyfish);
-    }
-  }
-
-  function createGreenParticles(x, y) {
-    for (let i = 0; i < 15; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'green-particle';
-      particle.style.left = x + 'px';
-      particle.style.top = y + 'px';
+  <div id="questionModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-letter" id="modalLetter">A</div>
+        <div>
+          <div class="modal-title" id="modalTitle">Pregunta</div>
+        </div>
+      </div>
       
-      const angle = (i / 15) * Math.PI * 2;
-      const distance = 50 + Math.random() * 50;
-      const tx = Math.cos(angle) * distance;
-      
-      particle.style.setProperty('--tx', tx + 'px');
-      particle.style.animation = `particleFloat ${0.8 + Math.random() * 0.4}s ease-out forwards`;
-      
-      document.body.appendChild(particle);
-      setTimeout(() => particle.remove(), 1200);
-    }
-  }
+      <div class="question-text" id="questionText">
+        Pregunta de ejemplo
+      </div>
 
-  const preguntas = {
-    'A': { pregunta: '[A] ¿Quién fue el padre del socialismo científico?', respuesta: 'MARX', respuestas_alt: ['Karl Marx', 'Karl', 'Marx'], explicacion: 'Karl Marx fue un filósofo y economista alemán que revolucionó el pensamiento social al crear el concepto del socialismo científico, basado en el análisis material e histórico de la sociedad.' },
-    'B': { pregunta: '[B] Viaje de 5 años en el que Darwin recopiló datos biológicos', respuesta: 'BEAGLE', respuestas_alt: ['HMS Beagle', 'Viaje del Beagle', 'HMS', 'Beagle'], explicacion: 'El viaje del HMS Beagle (1831-1836) fue fundamental para Darwin, permitiéndole recopilar especímenes y observaciones que sentarían las bases de su teoría de la evolución.' },
-    'C': { pregunta: '[C] ¿Quién propuso la "Ley de los tres estados"?', respuesta: 'COMTE', respuestas_alt: ['Auguste Comte', 'Auguste', 'Comte'], explicacion: 'Auguste Comte dividió la evolución del conocimiento humano en tres estados: teológico, metafísico y positivo, cada uno representando un avance en el pensamiento racional.' },
-    'D': { pregunta: '[D] ¿Qué sociólogo francés creó "Hechos Sociales"?', respuesta: 'DURKHEIM', respuestas_alt: ['Émile Durkheim', 'Emile', 'Durkheim'], explicacion: 'Émile Durkheim definió los hechos sociales como fenómenos colectivos que influyen en el comportamiento individual, sentando las bases de la sociología moderna.' },
-    'E': { pregunta: '[E] Corriente filosófica creada por Comte basada en observación', respuesta: 'EMPIRISMO', respuestas_alt: ['Positivismo', 'Empiricismo'], explicacion: 'El positivismo de Comte enfatiza la importancia de la observación y la experiencia como base del conocimiento científico, rechazando las explicaciones puramente teóricas.' },
-    'F': { pregunta: '[F] ¿En qué país nació Marx?', respuesta: 'FILOSOFIA', respuestas_alt: ['Alemania', 'Prusia', 'Tréveris', 'Francia'], explicacion: 'Marx nació en Tréveris, Prusia (actualmente Alemania), en 1818. Su formación filosófica fue decisiva para su posterior desarrollo del materialismo histórico.' },
-    'G': { pregunta: '[G] Islas donde Darwin observó variaciones en pinzones', respuesta: 'GALAPAGOS', respuestas_alt: ['Galápagos', 'Islas Galápagos', 'Galápagos'], explicacion: 'Las Islas Galápagos fueron cruciales para Darwin. Las variaciones que observó entre los pinzones de diferentes islas inspiraron su teoría de selección natural.' },
-    'H': { pregunta: '[H] Profesor mentor de Darwin en Cambridge', respuesta: 'HENSLOW', respuestas_alt: ['John Henslow', 'Henslow'], explicacion: 'John Stevens Henslow fue el maestro de Darwin en Cambridge, despertando en él la pasión por las ciencias naturales y preparándolo para el viaje del Beagle.' },
-    'I': { pregunta: '[I] ¿En qué influyó profundamente el marxismo?', respuesta: 'IDEOLOGIA', respuestas_alt: ['Ideología', 'Ideologías', 'Política'], explicacion: 'El marxismo transformó profundamente las ideologías políticas y sociales del mundo moderno, influyendo en movimientos revolucionarios y teorías sociales en todo el globo.' },
-    'J': { pregunta: '[J] Darwin publicó: "El origen del..."', respuesta: 'JUNGLA', respuestas_alt: ['especies', 'hombre', 'origen', 'vida'], explicacion: 'La obra más importante de Darwin fue "El origen de las especies" (1859), donde presentó su teoría de la evolución por selección natural, revolucionando la biología.' },
-    'K': { pregunta: '[K] Apellido del filósofo creador del materialismo histórico', respuesta: 'KARL', respuestas_alt: ['Marx', 'Marx Karl'], explicacion: 'Karl Marx fue un pensador alemán cuyas teorías sobre la historia material transformaron el pensamiento político y social del mundo contemporáneo.' },
-    'L': { pregunta: '[L] Concepto marxista del conflicto entre clases sociales', respuesta: 'LUCHA', respuestas_alt: ['Lucha de clases', 'Conflicto'], explicacion: 'La lucha de clases es el concepto central del marxismo, donde Marx propone que la historia es impulsada por los conflictos entre diferentes clases sociales económicamente definidas.' },
-    'M': { pregunta: '[M] Teoría de Marx sobre análisis de la historia', respuesta: 'MATERIALISMO', respuestas_alt: ['Materialismo histórico', 'Materialismo'], explicacion: 'El materialismo histórico de Marx sostiene que la base económica de una sociedad determina su estructura política e ideológica, rechazando explicaciones idealistas de la historia.' },
-    'N': { pregunta: '[N] Obra naturalista más importante de Darwin', respuesta: 'NATURALISTA', respuestas_alt: ['El origen de las especies', 'Origen'], explicacion: 'Darwin fue un naturalista cuya obra "El origen de las especies" revolucionó nuestra comprensión de la vida en la Tierra, proponiendo la evolución como mecanismo de cambio biológico.' },
-    'O': { pregunta: '[O] En la filosofía de Comte: "Orden y..."', respuesta: 'ORDEN', respuestas_alt: ['Orden y Progreso', 'Progreso'], explicacion: 'La divisa de Comte "Orden y Progreso" resume su visión de que la sociedad debe basarse en principios científicos para alcanzar el progreso mientras mantiene un orden estable.' },
-    'P': { pregunta: '[P] Corriente filosófica que busca conocimiento observado', respuesta: 'POSITIVISMO', respuestas_alt: ['Positivismo'], explicacion: 'El positivismo es la corriente filosófica creada por Comte que considera válido solo el conocimiento que puede ser verificado mediante la observación empírica y la experiencia.' },
-    'Q': { pregunta: '[Q] Marx criticaba los sistemas generadores de explotación', respuesta: 'QUIMICA', respuestas_alt: ['química', 'capitalismo', 'dinero', 'ganancias'], explicacion: 'Marx fue un crítico feroz del capitalismo, denunciando cómo el sistema económico genera explotación laboral y concentración de riqueza en manos de pocos propietarios.' },
-    'R': { pregunta: '[R] Darwin realizó investigaciones de... durante su viaje', respuesta: 'RECOLECCION', respuestas_alt: ['recolección', 'observación', 'recogida', 'coleccion'], explicacion: 'Durante el viaje del Beagle, Darwin se dedicó a la recolección sistemática de especímenes biológicos y fósiles, registrando meticulosamente sus observaciones de la naturaleza.' },
-    'S': { pregunta: '[S] Ideología política desarrollada a partir de Marx', respuesta: 'SOCIALISMO', respuestas_alt: ['Comunismo', 'Socialista'], explicacion: 'El socialismo es el sistema político y económico basado en las teorías marxistas, buscando eliminar la propiedad privada de los medios de producción y crear una sociedad más igualitaria.' },
-    'T': { pregunta: '[T] Periodo histórico estudiado por estos pensadores', respuesta: 'TRANSFORMACION', respuestas_alt: ['transformación', 'modernidad', 'transición'], explicacion: 'Los grandes pensadores de la modernidad analizaban las transformaciones profundas que experimentaba la sociedad con la industrialización y el cambio científico.' },
-    'U': { pregunta: '[U] ¿En qué universidad estudió Darwin?', respuesta: 'UNIVERSIDAD', respuestas_alt: ['Cambridge', 'Cambridge University'], explicacion: 'Darwin estudió en la Universidad de Cambridge, donde bajo la mentoría de John Henslow desarrolló su pasión por las ciencias naturales.' },
-    'V': { pregunta: '[V] Aspecto fundamental en la teoría de Darwin', respuesta: 'VARIABILIDAD', respuestas_alt: ['Variación', 'Variables', 'Variacion genetica'], explicacion: 'La variabilidad es fundamental en la teoría de Darwin. Sin variación genética en las poblaciones, la selección natural no tendría material sobre el cual actuar.' },
-    'W': { pregunta: '[W] Marx escribió sobre este concepto en Londres', respuesta: 'WORK', respuestas_alt: ['trabajo', 'obra'], explicacion: 'Marx pasó gran parte de su vida en Londres, donde escribió extensamente sobre el trabajo, la explotación laboral y las contradicciones del capitalismo industrial.' },
-    'X': { pregunta: '[X] Teoría que analiza relaciones complejas', respuesta: 'XENIAL', respuestas_alt: ['compleja', 'analisis'], explicacion: 'Los pensadores modernos desarrollaron teorías complejas que analizan las múltiples dimensiones de la sociedad: económica, política, social y cultural.' },
-    'Y': { pregunta: '[Y] ¿A partir de qué se desarrolló el pensamiento moderno?', respuesta: 'YACIMIENTOS', respuestas_alt: ['humanismo'], explicacion: 'El pensamiento moderno se desarrolló a partir del Renacimiento y la Ilustración, valorando la razón, la observación empírica y el análisis crítico de la realidad.' },
-    'Z': { pregunta: '[Z] Las Galápagos en la zona... ecuatorial', respuesta: 'ZONA', respuestas_alt: ['zona', 'ecuatorial'], explicacion: 'Las Islas Galápagos están ubicadas en la zona ecuatorial del Océano Pacífico, lo que proporciona un ambiente único con biodiversidad característica de regiones tropicales.' }
-  };
+      <div class="answer-hint" id="answerHint">
+        <strong>Tipo:</strong> La respuesta comienza con la letra indicada
+      </div>
 
-  const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  let letraActual = 0;
-  let aciertos = 0;
-  let totalPreguntas = 0;
-  let intentosActual = 0;
-  let respondida = false;
-  let letrasResueltas = new Set();
-  let elementosLetras = {};
-  let modalTimeout = null;
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="answer-input" 
+          id="answerInput" 
+          placeholder="Escribe tu respuesta..."
+          autocomplete="off"
+        >
+      </div>
 
-  function normalizarRespuesta(texto) {
-    return texto.toUpperCase().trim()
-      .replace(/á|à|ä/g, 'a').replace(/é|è|ë/g, 'e')
-      .replace(/í|ì|ï/g, 'i').replace(/ó|ò|ö/g, 'o')
-      .replace(/ú|ù|ü/g, 'u');
-  }
+      <div class="result-message" id="resultMessage"></div>
 
-  function dibujarRosco() {
-    const svg = document.getElementById('letters');
-    const radio = 150;
+      <div class="button-group">
+        <button class="btn btn-submit" id="submitBtn">Responder</button>
+        <button class="btn btn-skip" id="skipBtn">Saltar</button>
+      </div>
+    </div>
+  </div>
 
-    letras.forEach((letra, i) => {
-      const angulo = (i / 26) * Math.PI * 2 - Math.PI / 2;
-      const x = 200 + radio * Math.cos(angulo);
-      const y = 200 + radio * Math.sin(angulo);
-
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.style.cursor = 'pointer';
-      g.classList.add('letter-circle');
-      
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', x);
-      circle.setAttribute('cy', y);
-      circle.setAttribute('r', 26);
-      circle.setAttribute('fill', '#cccccc');
-      circle.setAttribute('stroke', '#999999');
-      circle.setAttribute('stroke-width', '2');
-      circle.setAttribute('filter', 'url(#shadow)');
-      
-      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('x', x);
-      text.setAttribute('y', y + 8);
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('font-size', '20');
-      text.setAttribute('font-weight', '700');
-      text.setAttribute('fill', '#666666');
-      text.textContent = letra;
-
-      g.appendChild(circle);
-      g.appendChild(text);
-      g.addEventListener('click', () => {
-        playSoundClick();
-        seleccionarLetra(i);
-      });
-      
-      elementosLetras[letra] = g;
-      svg.appendChild(g);
-    });
-  }
-
-  function iluminarLetra(letra) {
-    if (elementosLetras[letra]) {
-      const circle = elementosLetras[letra].querySelector('circle');
-      const rect = circle.getBoundingClientRect();
-      createGreenParticles(rect.x + rect.width / 2, rect.y + rect.height / 2);
-      elementosLetras[letra].classList.add('solved');
-    }
-  }
-
-  function seleccionarLetra(indice) {
-    letraActual = indice;
-    const letra = letras[indice];
-    
-    if (letrasResueltas.has(letra)) return;
-    
-    respondida = false;
-    intentosActual = 0;
-    document.getElementById('answer-input').value = '';
-    document.getElementById('feedback').innerHTML = '';
-    mostrarPregunta();
-  }
-
-  function mostrarPregunta() {
-    const letra = letras[letraActual];
-    const pregunta = preguntas[letra];
-    
-    document.getElementById('center-letter').textContent = letra;
-    document.getElementById('letter-badge').textContent = letra;
-    document.getElementById('question-label').textContent = 'Pregunta';
-    document.getElementById('question-text').textContent = pregunta.pregunta;
-    document.getElementById('answer-input').focus();
-    document.getElementById('answer-input').disabled = false;
-    document.getElementById('intento-counter').textContent = '';
-  }
-
-  function mostrarModalEstudio() {
-    const letra = letras[letraActual];
-    const datos = preguntas[letra];
-    
-    document.getElementById('modal-letter').textContent = letra;
-    document.getElementById('modal-question').textContent = datos.pregunta.replace(`[${letra}]`, '').trim();
-    document.getElementById('modal-answer').textContent = datos.respuesta;
-    document.getElementById('modal-explanation').textContent = datos.explicacion;
-    
-    const modal = document.getElementById('exposition-modal');
-    modal.classList.remove('hide');
-    modal.style.transform = 'translate(-50%, -50%) scale(1)';
-  }
-
-  function cerrarModalEstudio() {
-    const modal = document.getElementById('exposition-modal');
-    modal.classList.add('hide');
-    setTimeout(() => {
-      modal.style.transform = 'translate(-50%, -50%) scale(0)';
-    }, 400);
-  }
-
-  function comprobarRespuesta() {
-    if (respondida) return;
-    
-    const respuesta = document.getElementById('answer-input').value;
-    const letra = letras[letraActual];
-    const datos = preguntas[letra];
-    
-    const respuestaNormalizada = normalizarRespuesta(respuesta);
-    const correcta = normalizarRespuesta(datos.respuesta);
-    const alternativas = datos.respuestas_alt.map(r => normalizarRespuesta(r));
-    
-    intentosActual++;
-    const esCorrecta = respuestaNormalizada === correcta || alternativas.includes(respuestaNormalizada);
-    
-    if (esCorrecta) {
-      respondida = true;
-      aciertos++;
-      totalPreguntas++;
-      letrasResueltas.add(letra);
-      iluminarLetra(letra);
-      playSoundCorrect();
-      mostrarFeedback(true, `🎉 ¡CORRECTO! ${datos.respuesta}`);
-      document.getElementById('answer-input').disabled = true;
-      
-      if (modalTimeout) clearTimeout(modalTimeout);
-      modalTimeout = setTimeout(mostrarModalEstudio, 4000);
-      setTimeout(() => cerrarModalEstudio(), 16000);
-      
-      if (aciertos === 26) {
-        setTimeout(() => {
-          const finalMsg = document.createElement('div');
-          finalMsg.className = 'final-message';
-          finalMsg.textContent = '🎊 ¡FELICIDADES! ¡COMPLETASTE! 🎊';
-          document.body.appendChild(finalMsg);
-          setTimeout(() => createJellyfishes(), 500);
-          setTimeout(() => finalMsg.remove(), 4000);
-        }, 16500);
+  <script>
+    const gameData = [
+      {
+        letter: 'A',
+        question: '¿Filósofo griego discípulo de Platón, creador del Liceo? (Inicia con A)',
+        answer: 'Aristóteles',
+        type: 'starts',
+        difficulty: 'fácil'
+      },
+      {
+        letter: 'B',
+        question: '¿Filósofo y lógico británico ganador del Premio Nobel de Literatura? (Inicia con B)',
+        answer: 'Bertrand Russell',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'C',
+        question: '¿Filósofo chino cuyo nombre original era Kong Fuzi? (Contiene C)',
+        answer: 'Confucio',
+        type: 'contains',
+        difficulty: 'media'
+      },
+      {
+        letter: 'D',
+        question: '¿Filósofo francés autor de "Discurso del Método"? (Inicia con D)',
+        answer: 'Descartes',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'E',
+        question: '¿Filósofo alemán autor de "Así habló Zaratustra"? (Inicia con E)',
+        answer: 'Espinoza',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'F',
+        question: '¿Filósofo griego fundador de la escuela Estóica? (Inicia con F)',
+        answer: 'Zenón de Citio',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'G',
+        question: '¿Filósofo italiano renacentista condenado por la Inquisición? (Inicia con G)',
+        answer: 'Giordano Bruno',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'H',
+        question: '¿Filósofo alemán idealista, autor de la Fenomenología del Espíritu? (Inicia con H)',
+        answer: 'Hegel',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'I',
+        question: '¿Filósofo alemán criticista, autor de "Crítica de la Razón Pura"? (Inicia con I)',
+        answer: 'Immanuel Kant',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'J',
+        question: '¿Filósofo francés existencialista del siglo XX? (Inicia con J)',
+        answer: 'Jean-Paul Sartre',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'K',
+        question: '¿Filósofo danés existencialista, padre del existencialismo? (Inicia con K)',
+        answer: 'Kierkegaard',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'L',
+        question: '¿Filósofo británico empirista, escéptico del siglo XVIII? (Inicia con L)',
+        answer: 'David Hume',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'M',
+        question: '¿Filósofo alemán autor del Manifiesto Comunista junto a Engels? (Inicia con M)',
+        answer: 'Karl Marx',
+        type: 'starts',
+        difficulty: 'fácil'
+      },
+      {
+        letter: 'N',
+        question: '¿Filósofo alemán de Basilea, autor de "Más allá del Bien y del Mal"? (Inicia con N)',
+        answer: 'Nietzsche',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'O',
+        question: '¿Filósofo y matemático inglés, autor de "Principia Mathematica"? (Inicia con O)',
+        answer: 'Occam',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'P',
+        question: '¿Filósofo griego discípulo de Sócrates, fundador de la Academia? (Inicia con P)',
+        answer: 'Platón',
+        type: 'starts',
+        difficulty: 'fácil'
+      },
+      {
+        letter: 'Q',
+        question: '¿Filósofo español medieval, conocido como "el Doctor Universal"? (Contiene Q)',
+        answer: 'Tomás de Aquino',
+        type: 'contains',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'R',
+        question: '¿Filósofo francés de los Enciclopedistas, apasionado por la naturaleza? (Inicia con R)',
+        answer: 'Jean-Jacques Rousseau',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'S',
+        question: '¿Filósofo griego clásico, maestro de Platón, bebió la cicuta? (Inicia con S)',
+        answer: 'Sócrates',
+        type: 'starts',
+        difficulty: 'fácil'
+      },
+      {
+        letter: 'T',
+        question: '¿Filósofo inglés del siglo XVII, autor de "Leviatán"? (Inicia con T)',
+        answer: 'Thomas Hobbes',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'U',
+        question: '¿Filósofo alemán del siglo XIX, crítico del materialismo científico? (Contiene U)',
+        answer: 'Arthur Schopenhauer',
+        type: 'contains',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'V',
+        question: '¿Filósofo y escritor francés de la Ilustración, satírico y crítico? (Inicia con V)',
+        answer: 'Voltaire',
+        type: 'starts',
+        difficulty: 'media'
+      },
+      {
+        letter: 'W',
+        question: '¿Filósofo austriaco del siglo XX, revolucionó la filosofía del lenguaje? (Inicia con W)',
+        answer: 'Ludwig Wittgenstein',
+        type: 'starts',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'X',
+        question: '¿Filósofo griego presocrático, conocido como el "Oscuro"? (Contiene X)',
+        answer: 'Heráclito',
+        type: 'contains',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'Y',
+        question: '¿Filósofo griego que cuestionaba el conocimiento humano? (Contiene Y)',
+        answer: 'Pirrón',
+        type: 'contains',
+        difficulty: 'difícil'
+      },
+      {
+        letter: 'Z',
+        question: '¿Filósofo griego eleático, famoso por sus paradojas sobre el movimiento? (Inicia con Z)',
+        answer: 'Zenón de Elea',
+        type: 'starts',
+        difficulty: 'difícil'
       }
-    } else {
-      playSoundIncorrect();
-      mostrarFeedback(false, `❌ Incorrecto. Intenta (${intentosActual})`);
-      document.getElementById('intento-counter').textContent = `⚠️ Intento ${intentosActual}`;
-      document.getElementById('answer-input').value = '';
-      document.getElementById('answer-input').focus();
+    ];
+
+    class RoscoGame {
+      constructor(data) {
+        this.gameData = data;
+        this.gameState = {
+          correct: 0,
+          skipped: 0,
+          errors: 0,
+          usedLetters: new Set(),
+          correctLetters: new Set(),
+          skippedLetters: new Set(),
+          incorrectLetters: new Set()
+        };
+        this.currentLetter = null;
+        this.modal = document.getElementById('questionModal');
+        this.init();
+      }
+
+      init() {
+        this.createStars();
+        this.renderRosco();
+        this.attachEventListeners();
+      }
+
+      createStars() {
+        const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 80; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.top = Math.random() * 100 + '%';
+          star.style.animationDelay = Math.random() * 3 + 's';
+          starsContainer.appendChild(star);
+        }
+      }
+
+      renderRosco() {
+        const circle = document.getElementById('roscoCircle');
+        circle.innerHTML = '';
+        
+        const totalLetters = this.gameData.length;
+        const radius = 280;
+        const center = { x: 300, y: 300 };
+
+        this.gameData.forEach((item, index) => {
+          const angle = (index / totalLetters) * Math.PI * 2 - Math.PI / 2;
+          const x = center.x + radius * Math.cos(angle);
+          const y = center.y + radius * Math.sin(angle);
+
+          const button = document.createElement('button');
+          button.className = 'rosco-letter';
+          button.textContent = item.letter;
+          button.dataset.letter = item.letter;
+          
+          button.style.left = x + 'px';
+          button.style.top = y + 'px';
+
+          if (this.gameState.correctLetters.has(item.letter)) {
+            button.classList.add('used');
+            button.disabled = true;
+          } else if (this.gameState.skippedLetters.has(item.letter)) {
+            button.classList.add('skip');
+            button.disabled = true;
+          } else if (this.gameState.incorrectLetters.has(item.letter)) {
+            button.classList.add('incorrect');
+            button.disabled = true;
+          }
+          
+          button.addEventListener('click', () => this.openQuestion(item.letter));
+          circle.appendChild(button);
+        });
+      }
+
+      openQuestion(letter) {
+        if (this.gameState.usedLetters.has(letter)) return;
+
+        const question = this.gameData.find(q => q.letter === letter);
+        this.currentLetter = question;
+
+        document.getElementById('modalLetter').textContent = letter;
+        document.getElementById('modalTitle').textContent = `Pregunta ${letter}`;
+        document.getElementById('questionText').textContent = question.question;
+        
+        const hintText = question.type === 'starts' 
+          ? `La respuesta comienza con la letra ${letter}`
+          : `La respuesta contiene la letra ${letter}`;
+        
+        document.getElementById('answerHint').innerHTML = `<strong>Tipo:</strong> ${hintText}`;
+        
+        document.getElementById('answerInput').value = '';
+        document.getElementById('resultMessage').textContent = '';
+        document.getElementById('resultMessage').className = 'result-message';
+        
+        this.modal.classList.add('active');
+        document.getElementById('answerInput').focus();
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        this.currentLetter = null;
+      }
+
+      checkAnswer(userAnswer) {
+        if (!userAnswer.trim()) {
+          this.showMessage('Por favor, escribe una respuesta', 'error');
+          return false;
+        }
+
+        const correct = userAnswer.toLowerCase().trim() === this.currentLetter.answer.toLowerCase();
+        
+        if (correct) {
+          this.gameState.correctLetters.add(this.currentLetter.letter);
+          this.gameState.usedLetters.add(this.currentLetter.letter);
+          this.gameState.correct++;
+          this.showMessage('✓ ¡Correcto!', 'success');
+          
+          setTimeout(() => {
+            this.closeModal();
+            this.updateUI();
+            this.checkGameCompletion();
+          }, 1000);
+          return true;
+        } else {
+          this.gameState.errors++;
+          this.showMessage(`✗ Incorrecto. La respuesta es: <strong>${this.currentLetter.answer}</strong>`, 'error');
+          
+          setTimeout(() => {
+            this.gameState.incorrectLetters.add(this.currentLetter.letter);
+            this.gameState.usedLetters.add(this.currentLetter.letter);
+            this.closeModal();
+            this.updateUI();
+          }, 2500);
+          return false;
+        }
+      }
+
+      skipQuestion() {
+        this.gameState.skipped++;
+        this.gameState.skippedLetters.add(this.currentLetter.letter);
+        this.gameState.usedLetters.add(this.currentLetter.letter);
+        this.closeModal();
+        this.updateUI();
+      }
+
+      showMessage(text, type) {
+        const msgEl = document.getElementById('resultMessage');
+        msgEl.innerHTML = text;
+        msgEl.className = `result-message ${type}`;
+      }
+
+      checkGameCompletion() {
+        if (this.gameState.correct === 26) {
+          const completionMsg = document.getElementById('completionMessage');
+          completionMsg.classList.add('show');
+        }
+      }
+
+      updateUI() {
+        document.getElementById('correctCount').textContent = `${this.gameState.correct}/26`;
+        document.getElementById('skippedCount').textContent = this.gameState.skipped;
+        document.getElementById('errorCount').textContent = this.gameState.errors;
+        
+        const progress = (this.gameState.correct / 26) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+        
+        this.renderRosco();
+      }
+
+      attachEventListeners() {
+        document.getElementById('submitBtn').addEventListener('click', () => {
+          const answer = document.getElementById('answerInput').value;
+          this.checkAnswer(answer);
+        });
+
+        document.getElementById('answerInput').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const answer = document.getElementById('answerInput').value;
+            this.checkAnswer(answer);
+          }
+        });
+
+        document.getElementById('skipBtn').addEventListener('click', () => {
+          this.skipQuestion();
+        });
+
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) {
+            this.closeModal();
+          }
+        });
+      }
     }
-    
-    if (respondida) actualizarScore();
-  }
 
-  function saltarPregunta() {
-    if (respondida) return;
-    respondida = true;
-    totalPreguntas++;
-    const letra = letras[letraActual];
-    const datos = preguntas[letra];
-    mostrarFeedback(false, `⏭️ Saltada. Respuesta: ${datos.respuesta}`);
-    document.getElementById('answer-input').disabled = true;
-    actualizarScore();
-  }
-
-  function mostrarFeedback(esCorrecta, mensaje) {
-    const fb = document.getElementById('feedback');
-    fb.className = `feedback ${esCorrecta ? 'correct' : 'incorrect'}`;
-    fb.textContent = mensaje;
-  }
-
-  function actualizarScore() {
-    document.getElementById('score-display').textContent = `🎯 Aciertos: ${aciertos} / ${totalPreguntas}`;
-  }
-
-  document.getElementById('btn-check').addEventListener('click', comprobarRespuesta);
-  document.getElementById('btn-skip').addEventListener('click', saltarPregunta);
-  document.getElementById('answer-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && !respondida) comprobarRespuesta();
-  });
-
-  document.getElementById('close-modal').addEventListener('click', cerrarModalEstudio);
-
-  document.getElementById('sound-toggle').addEventListener('click', function() {
-    soundEnabled = !soundEnabled;
-    this.classList.toggle('muted');
-    this.textContent = soundEnabled ? '🔊' : '🔇';
-  });
-
-  createStars();
-  createFlyingCanes();
-  dibujarRosco();
-</script>
-
+    // Iniciar el juego
+    const game = new RoscoGame(gameData);
+  </script>
 </body>
 </html>
