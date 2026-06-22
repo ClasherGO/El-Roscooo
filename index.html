@@ -927,7 +927,7 @@
     
     const preguntaLimpia = datos.pregunta;
     document.getElementById('question-text').textContent = preguntaLimpia;
-    document.getElementById('question-hint').textContent = `[${datos.tipo.toUpperCase()}] → "${datos.palabra}"`;
+    document.getElementById('question-hint').textContent = '';
 
     document.getElementById('answer-input').value = '';
     document.getElementById('answer-input').disabled = false;
@@ -954,7 +954,7 @@
       
       feedback.classList.remove('hidden', 'incorrect');
       feedback.classList.add('correct');
-      feedback.textContent = `✓ ¡Correcto! "${datos.palabra}"`;
+      feedback.textContent = `✓ ¡Correcto!`;
 
       document.getElementById('answer-input').disabled = true;
       document.getElementById('btn-verify').disabled = true;
