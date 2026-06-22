@@ -3,87 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rosco Interactivo - Modo Exposición</title>
+  <title>Rosco Interactivo Premium - Exposición</title>
   <style>
     * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      padding: 2rem;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0a1428 0%, #1a3a4a 50%, #0f1f2f 100%);
-      min-height: 100vh;
-      color: #333;
+    :root {
+      --color-primary: #4a90e2;
+      --color-primary-dark: #357abd;
+      --color-success: #28a745;
+      --color-success-dark: #1e7e34;
+      --color-gray-inactive: #5a6b7a;
+      --color-gray-light: #f0f4f8;
+      --color-bg-dark: #0d1117;
+      --color-surface: #1c2128;
+      --color-text: #c9d1d9;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============ AUDIO SETUP ============ */
+    .audio-setup {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+    }
+
+    .btn-mute {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .btn-mute:hover {
+      background: var(--color-primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .btn-mute.muted {
+      border-color: #888;
+      color: #888;
+    }
+
+    /* ============ CONTAINER ============ */
     .container {
+      flex: 1;
       max-width: 1400px;
       margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    /* HEADER */
+    /* ============ HEADER ============ */
     .header {
       text-align: center;
-      color: white;
-      margin-bottom: 2rem;
+      animation: fadeInDown 0.6s ease;
     }
 
     .header h1 {
       font-size: 2.5rem;
       margin: 0;
       font-weight: 700;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
     }
 
     .header p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin: 0.5rem 0 0 0;
-      opacity: 0.9;
+      opacity: 0.8;
     }
 
-    /* LAYOUT PRINCIPAL */
+    /* ============ MAIN LAYOUT ============ */
     .main-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      margin-bottom: 2rem;
+      flex: 1;
+      min-height: 0;
     }
 
-    /* ROSCO */
+    /* ============ ROSCO SECTION ============ */
     .rosco-section {
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: fadeInLeft 0.6s ease 0.1s both;
     }
 
     .rosco-canvas {
       width: 100%;
       max-width: 500px;
       aspect-ratio: 1;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      background: radial-gradient(135deg, var(--color-surface) 0%, #0d1117 100%);
+      border-radius: 24px;
       padding: 20px;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rosco-canvas::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(74,144,226,0.1) 0%, transparent 70%);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, 30px); }
     }
 
     .rosco-svg {
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 1;
     }
 
-    /* PANEL DE JUEGO */
+    /* ============ GAME PANEL ============ */
     .game-panel {
-      background: white;
-      border-radius: 20px;
+      background: var(--color-surface);
+      border-radius: 24px;
       padding: 2rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.1);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      animation: fadeInRight 0.6s ease 0.1s both;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
+    /* ============ QUESTION SECTION ============ */
     .question-section {
-      min-height: 150px;
+      min-height: 160px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -93,31 +188,40 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #4a90e2, #357abd);
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
       color: white;
       border-radius: 50%;
       font-size: 1.8rem;
       font-weight: 700;
       margin-bottom: 1rem;
+      box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+      position: relative;
+      animation: badgePulse 0.4s ease;
+    }
+
+    @keyframes badgePulse {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .question-text {
       font-size: 1.5rem;
       font-weight: 600;
-      color: #0a1428;
+      color: white;
       line-height: 1.6;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .question-hint {
-      font-size: 0.95rem;
-      color: #666;
+      font-size: 0.9rem;
+      color: rgba(201, 209, 217, 0.6);
       font-style: italic;
     }
 
-    /* INPUT Y BOTONES */
+    /* ============ INPUT & BUTTONS ============ */
     .input-section {
       display: flex;
       gap: 0.75rem;
@@ -127,16 +231,33 @@
       flex: 1;
       padding: 12px 16px;
       font-size: 1.1rem;
-      border: 2px solid #ddd;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(74, 144, 226, 0.3);
       border-radius: 10px;
+      color: white;
       font-family: inherit;
-      transition: all 0.3s;
+      transition: var(--transition);
+    }
+
+    .answer-input::placeholder {
+      color: rgba(201, 209, 217, 0.4);
+    }
+
+    .answer-input:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(74, 144, 226, 0.5);
     }
 
     .answer-input:focus {
       outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+      background: rgba(255,255,255,0.15);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    }
+
+    .answer-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     .button-group {
@@ -152,29 +273,51 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: var(--transition);
       font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      pointer-events: none;
+    }
+
+    button:active::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn-verify {
-      background: linear-gradient(135deg, #4a90e2, #357abd);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
       color: white;
+      box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
     }
 
     .btn-verify:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+      box-shadow: 0 12px 32px rgba(74, 144, 226, 0.4);
     }
 
     .btn-skip {
-      background: #f5f5f5;
-      color: #333;
-      border: 2px solid #ddd;
+      background: rgba(255,255,255,0.08);
+      color: var(--color-text);
+      border: 1.5px solid rgba(255,255,255,0.15);
     }
 
     .btn-skip:hover:not(:disabled) {
-      background: #e8e8e8;
-      border-color: #999;
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
     }
 
     button:disabled {
@@ -182,7 +325,7 @@
       cursor: not-allowed;
     }
 
-    /* FEEDBACK */
+    /* ============ FEEDBACK ============ */
     .feedback {
       padding: 1rem;
       border-radius: 10px;
@@ -193,51 +336,57 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: slideIn 0.3s ease;
+      animation: slideUp 0.3s ease;
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-10px); opacity: 0; }
+    @keyframes slideUp {
+      from { transform: translateY(10px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
     .feedback.correct {
-      background: #d4edda;
-      color: #155724;
-      border: 2px solid #28a745;
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+      border: 1.5px solid rgba(40, 167, 69, 0.4);
     }
 
     .feedback.incorrect {
-      background: #f8d7da;
-      color: #721c24;
-      border: 2px solid #f5c6cb;
+      background: rgba(220, 53, 69, 0.2);
+      color: #ff6b6b;
+      border: 1.5px solid rgba(220, 53, 69, 0.4);
     }
 
     .feedback.hidden {
-      visibility: hidden;
+      display: none;
     }
 
-    /* SCORE */
+    /* ============ SCORE BOARD ============ */
     .score-board {
-      background: linear-gradient(135deg, #f0f4f8, #d9e8f5);
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(40, 167, 69, 0.1));
       padding: 1.5rem;
       border-radius: 10px;
       text-align: center;
+      border: 1px solid rgba(74, 144, 226, 0.2);
     }
 
     .score-label {
       font-size: 0.9rem;
-      color: #666;
+      color: rgba(201, 209, 217, 0.7);
       margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .score-value {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #4a90e2;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* MODAL DE INFORMACIÓN */
+    /* ============ MODAL ============ */
     .info-modal {
       position: fixed;
       top: 0;
@@ -245,13 +394,14 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       padding: 2rem;
     }
 
@@ -261,22 +411,23 @@
     }
 
     .info-card {
-      background: white;
-      border-radius: 20px;
+      background: var(--color-surface);
+      border-radius: 24px;
       padding: 2.5rem;
       max-width: 600px;
       width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      animation: cardAppear 0.4s ease;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+      animation: cardSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    @keyframes cardAppear {
+    @keyframes cardSlideUp {
       from {
-        transform: scale(0.9) translateY(-30px);
+        transform: translateY(40px) scale(0.95);
         opacity: 0;
       }
       to {
-        transform: scale(1) translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
       }
     }
@@ -291,7 +442,7 @@
     .info-letter-badge {
       width: 80px;
       height: 80px;
-      background: linear-gradient(135deg, #28a745, #1e7e34);
+      background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
       color: white;
       border-radius: 50%;
       display: flex;
@@ -300,31 +451,48 @@
       font-size: 3rem;
       font-weight: 700;
       flex-shrink: 0;
+      box-shadow: 0 12px 32px rgba(40, 167, 69, 0.4);
+      animation: badgePulse 0.4s ease;
     }
 
     .info-header-text h3 {
       margin: 0;
-      color: #0a1428;
+      color: white;
       font-size: 1.4rem;
+      line-height: 1.5;
     }
 
     .info-header-text p {
       margin: 0.5rem 0 0 0;
-      color: #666;
+      color: rgba(201, 209, 217, 0.6);
       font-size: 0.95rem;
     }
 
+    .info-type-badge {
+      display: inline-block;
+      background: rgba(40, 167, 69, 0.2);
+      color: var(--color-success);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
     .info-answer {
-      background: linear-gradient(135deg, #d4edda, #c3e6cb);
-      border-left: 5px solid #28a745;
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.05));
+      border-left: 4px solid var(--color-success);
       padding: 1.5rem;
       border-radius: 10px;
       margin-bottom: 1.5rem;
+      border: 1px solid rgba(40, 167, 69, 0.2);
     }
 
     .info-answer-label {
       font-size: 0.85rem;
-      color: #666;
+      color: rgba(201, 209, 217, 0.6);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
@@ -333,14 +501,19 @@
     .info-answer-text {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #155724;
+      color: var(--color-success);
+      letter-spacing: -0.5px;
     }
 
     .info-explanation {
       font-size: 1.05rem;
       line-height: 1.8;
-      color: #333;
+      color: var(--color-text);
       margin-bottom: 2rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .info-footer {
@@ -350,18 +523,80 @@
 
     .btn-continue {
       flex: 1;
-      background: linear-gradient(135deg, #28a745, #1e7e34);
+      background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
       color: white;
       padding: 14px 20px;
       font-size: 1.05rem;
+      box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
     }
 
     .btn-continue:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+      box-shadow: 0 12px 32px rgba(40, 167, 69, 0.4);
     }
 
-    /* RESPONSIVE */
+    /* ============ LETTER CIRCLE STYLES ============ */
+    .letter-circle {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .letter-circle-shape {
+      transition: var(--transition);
+    }
+
+    .letter-circle:hover .letter-circle-shape {
+      filter: brightness(1.2);
+    }
+
+    .letter-circle.active .letter-circle-shape {
+      animation: activeGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes activeGlow {
+      0%, 100% { 
+        filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.5));
+      }
+      50% { 
+        filter: drop-shadow(0 0 16px rgba(74, 144, 226, 0.8));
+      }
+    }
+
+    .letter-circle.solved .letter-circle-shape {
+      animation: solvedPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes solvedPop {
+      0% { 
+        r: 28;
+        fill-opacity: 0.5;
+      }
+      50% { 
+        r: 32;
+      }
+      100% { 
+        r: 28;
+        fill-opacity: 1;
+      }
+    }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeInDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInLeft {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeInRight {
+      from { transform: translateX(20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* ============ RESPONSIVE ============ */
     @media (max-width: 1024px) {
       .main-layout {
         grid-template-columns: 1fr;
@@ -373,6 +608,10 @@
     }
 
     @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
       .header h1 {
         font-size: 1.8rem;
       }
@@ -388,10 +627,18 @@
       .button-group {
         grid-template-columns: 1fr;
       }
+
+      .info-card {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+
+<div class="audio-setup">
+  <button class="btn-mute" id="btn-mute" title="Silenciar">🔊</button>
+</div>
 
 <div class="container">
   <div class="header">
@@ -400,17 +647,16 @@
   </div>
 
   <div class="main-layout">
-    <!-- ROSCO -->
     <div class="rosco-section">
       <div class="rosco-canvas">
         <svg class="rosco-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="shadow">
-              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
             </filter>
           </defs>
           
-          <circle cx="200" cy="200" r="70" fill="#555555" stroke="white" stroke-width="3" filter="url(#shadow)"/>
+          <circle cx="200" cy="200" r="70" fill="#5a6b7a" stroke="white" stroke-width="3" filter="url(#shadow)"/>
           <text x="200" y="220" text-anchor="middle" font-size="48" font-weight="700" fill="white" id="center-letter">A</text>
           
           <g id="letters"></g>
@@ -418,7 +664,6 @@
       </div>
     </div>
 
-    <!-- PANEL DE JUEGO -->
     <div class="game-panel">
       <div class="question-section">
         <div class="letter-badge" id="letter-badge">A</div>
@@ -451,7 +696,6 @@
   </div>
 </div>
 
-<!-- MODAL DE INFORMACIÓN -->
 <div class="info-modal" id="info-modal">
   <div class="info-card">
     <div class="info-header">
@@ -459,6 +703,7 @@
       <div class="info-header-text">
         <h3 id="info-question"></h3>
         <p>Respuesta correcta</p>
+        <div class="info-type-badge" id="info-type">EMPIEZA</div>
       </div>
     </div>
 
@@ -476,164 +721,80 @@
 </div>
 
 <script>
+  // ============ AUDIO CONFIGURATION ============
+  // URLs de sonidos (reemplaza con tus propias URLs)
+  const SOUND_URLS = {
+    click: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3',
+    correct: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
+    modalOpen: 'https://assets.mixkit.co/active_storage/sfx/1442/1442-preview.mp3'
+  };
+
+  // ============ AUDIO MANAGER ============
+  class AudioManager {
+    constructor() {
+      this.enabled = true;
+      this.audioCache = {};
+    }
+
+    playSound(soundKey) {
+      if (!this.enabled) return;
+
+      try {
+        const url = SOUND_URLS[soundKey];
+        if (!url) return;
+
+        // Reutiliza elemento de audio si existe
+        if (!this.audioCache[soundKey]) {
+          const audio = new Audio(url);
+          audio.volume = 0.4;
+          this.audioCache[soundKey] = audio;
+        }
+
+        const audio = this.audioCache[soundKey];
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+          console.warn(`Audio play failed for ${soundKey}:`, err.message);
+        });
+      } catch (error) {
+        console.warn(`Audio error for ${soundKey}:`, error.message);
+      }
+    }
+
+    toggle() {
+      this.enabled = !this.enabled;
+    }
+  }
+
+  const audioManager = new AudioManager();
+
   // ============ BASE DE DATOS DE PREGUNTAS ============
   const preguntas = {
-    'A': {
-      pregunta: '[A] ¿Quién fue el padre del socialismo científico?',
-      respuesta: 'MARX',
-      respuestas_alt: ['Karl Marx', 'Karl', 'Marx'],
-      explicacion: 'Karl Marx fue un filósofo y economista alemán que revolucionó el pensamiento social al crear el concepto del socialismo científico, basado en el análisis material e histórico de la sociedad.'
-    },
-    'B': {
-      pregunta: '[B] Viaje de 5 años en el que Darwin recopiló datos biológicos',
-      respuesta: 'BEAGLE',
-      respuestas_alt: ['HMS Beagle', 'Viaje del Beagle', 'HMS'],
-      explicacion: 'El viaje del HMS Beagle (1831-1836) fue fundamental para Darwin, permitiéndole recopilar especímenes y observaciones que sentarían las bases de su teoría de la evolución.'
-    },
-    'C': {
-      pregunta: '[C] ¿Quién propuso la "Ley de los tres estados"?',
-      respuesta: 'COMTE',
-      respuestas_alt: ['Auguste Comte', 'Auguste'],
-      explicacion: 'Auguste Comte dividió la evolución del conocimiento humano en tres estados: teológico, metafísico y positivo, cada uno representando un avance en el pensamiento racional.'
-    },
-    'D': {
-      pregunta: '[D] Sociólogo francés que creó el concepto "Hechos Sociales"',
-      respuesta: 'DURKHEIM',
-      respuestas_alt: ['Émile Durkheim', 'Emile'],
-      explicacion: 'Émile Durkheim definió los hechos sociales como fenómenos colectivos que influyen en el comportamiento individual, sentando las bases de la sociología moderna.'
-    },
-    'E': {
-      pregunta: '[E] Corriente filosófica creada por Comte basada en observación',
-      respuesta: 'EMPIRISMO',
-      respuestas_alt: ['Positivismo', 'Empiricismo'],
-      explicacion: 'El positivismo de Comte enfatiza la importancia de la observación y la experiencia como base del conocimiento científico.'
-    },
-    'F': {
-      pregunta: '[F] País donde nació Karl Marx',
-      respuesta: 'FILOSOFIA',
-      respuestas_alt: ['Alemania', 'Prusia'],
-      explicacion: 'Marx nació en Tréveris, Prusia (actualmente Alemania). Su formación filosófica fue decisiva para el desarrollo del materialismo histórico.'
-    },
-    'G': {
-      pregunta: '[G] Islas donde Darwin observó variaciones en pinzones',
-      respuesta: 'GALAPAGOS',
-      respuestas_alt: ['Galápagos', 'Islas Galápagos'],
-      explicacion: 'Las Islas Galápagos fueron cruciales para Darwin. Las variaciones que observó lo inspiraron a desarrollar su teoría de selección natural.'
-    },
-    'H': {
-      pregunta: '[H] Profesor mentor de Darwin en Cambridge',
-      respuesta: 'HENSLOW',
-      respuestas_alt: ['John Henslow'],
-      explicacion: 'John Stevens Henslow fue el maestro de Darwin en Cambridge, despertando su pasión por las ciencias naturales.'
-    },
-    'I': {
-      pregunta: '[I] ¿En qué influyó profundamente el marxismo?',
-      respuesta: 'IDEOLOGIA',
-      respuestas_alt: ['Ideología', 'Ideologías'],
-      explicacion: 'El marxismo transformó profundamente las ideologías políticas y sociales del mundo moderno.'
-    },
-    'J': {
-      pregunta: '[J] Darwin escribió: "El origen del..."',
-      respuesta: 'JUNGLA',
-      respuestas_alt: ['especies', 'hombre', 'origen'],
-      explicacion: 'Su obra "El origen de las especies" (1859) revolucionó la biología, presentando la teoría de la evolución por selección natural.'
-    },
-    'K': {
-      pregunta: '[K] Apellido del filósofo alemán del materialismo histórico',
-      respuesta: 'KARL',
-      respuestas_alt: ['Marx'],
-      explicacion: 'Karl Marx fue un pensador cuyas teorías transformaron el pensamiento político y social contemporáneo.'
-    },
-    'L': {
-      pregunta: '[L] Concepto marxista del conflicto entre clases',
-      respuesta: 'LUCHA',
-      respuestas_alt: ['Lucha de clases'],
-      explicacion: 'La lucha de clases es el concepto central del marxismo, donde la historia es impulsada por conflictos entre clases sociales.'
-    },
-    'M': {
-      pregunta: '[M] Teoría de Marx sobre análisis de la historia',
-      respuesta: 'MATERIALISMO',
-      respuestas_alt: ['Materialismo histórico'],
-      explicacion: 'El materialismo histórico sostiene que la base económica determina la estructura política e ideológica de una sociedad.'
-    },
-    'N': {
-      pregunta: '[N] Obra naturalista más importante de Darwin',
-      respuesta: 'NATURALISTA',
-      respuestas_alt: ['El origen de las especies', 'Origen'],
-      explicacion: 'Darwin fue un naturalista cuya obra revolucionó nuestra comprensión de la vida en la Tierra.'
-    },
-    'O': {
-      pregunta: '[O] En la filosofía de Comte: "Orden y..."',
-      respuesta: 'ORDEN',
-      respuestas_alt: ['Orden y Progreso'],
-      explicacion: 'La divisa de Comte resume su visión de que la sociedad debe basarse en principios científicos para alcanzar el progreso.'
-    },
-    'P': {
-      pregunta: '[P] Corriente que busca conocimiento a través de observación',
-      respuesta: 'POSITIVISMO',
-      respuestas_alt: [],
-      explicacion: 'El positivismo considera válido solo el conocimiento verificable mediante observación empírica y experiencia.'
-    },
-    'Q': {
-      pregunta: '[Q] Marx criticaba los sistemas generadores de explotación',
-      respuesta: 'QUIMICA',
-      respuestas_alt: ['capitalismo', 'dinero'],
-      explicacion: 'Marx fue un crítico del capitalismo, denunciando cómo genera explotación laboral.'
-    },
-    'R': {
-      pregunta: '[R] Darwin realizó investigaciones de... durante su viaje',
-      respuesta: 'RECOLECCION',
-      respuestas_alt: ['recolección', 'observación'],
-      explicacion: 'Durante el viaje del Beagle, Darwin realizó recolección sistemática de especímenes biológicos y fósiles.'
-    },
-    'S': {
-      pregunta: '[S] Ideología política basada en teorías de Marx',
-      respuesta: 'SOCIALISMO',
-      respuestas_alt: ['Comunismo'],
-      explicacion: 'El socialismo busca eliminar la propiedad privada de los medios de producción.'
-    },
-    'T': {
-      pregunta: '[T] Periodo histórico estudiado por estos pensadores',
-      respuesta: 'TRANSFORMACION',
-      respuestas_alt: ['transformación', 'modernidad'],
-      explicacion: 'Los grandes pensadores analizaban las transformaciones profundas con la industrialización.'
-    },
-    'U': {
-      pregunta: '[U] ¿En qué universidad estudió Darwin?',
-      respuesta: 'UNIVERSIDAD',
-      respuestas_alt: ['Cambridge'],
-      explicacion: 'Darwin estudió en Cambridge, donde bajo la mentoría de Henslow desarrolló su pasión por las ciencias naturales.'
-    },
-    'V': {
-      pregunta: '[V] Aspecto fundamental en la teoría de Darwin',
-      respuesta: 'VARIABILIDAD',
-      respuestas_alt: ['Variación'],
-      explicacion: 'La variabilidad genética es fundamental para que la selección natural actúe sobre las poblaciones.'
-    },
-    'W': {
-      pregunta: '[W] Marx escribió extensamente sobre este concepto',
-      respuesta: 'WORK',
-      respuestas_alt: ['trabajo', 'obra'],
-      explicacion: 'Marx pasó su vida escribiendo sobre el trabajo y la explotación laboral en el capitalismo.'
-    },
-    'X': {
-      pregunta: '[X] Teoría que analiza relaciones complejas sociales',
-      respuesta: 'XENIAL',
-      respuestas_alt: ['compleja'],
-      explicacion: 'Los pensadores modernos desarrollaron teorías que analizan múltiples dimensiones de la sociedad.'
-    },
-    'Y': {
-      pregunta: '[Y] ¿A partir de qué se desarrolló el pensamiento moderno?',
-      respuesta: 'YACIMIENTOS',
-      respuestas_alt: ['humanismo'],
-      explicacion: 'El pensamiento moderno se desarrolló desde el Renacimiento, valorando la razón y la observación empírica.'
-    },
-    'Z': {
-      pregunta: '[Z] Las Galápagos en la zona... ecuatorial',
-      respuesta: 'ZONA',
-      respuestas_alt: ['ecuatorial'],
-      explicacion: 'Las Islas Galápagos están en la zona ecuatorial del Pacífico, con biodiversidad única.'
-    }
+    'A': { tipo: 'empieza', palabra: 'ADAPTACION', pregunta: 'Concepto clave del \'Árbol de la Vida\' que, junto a la variación y al ancestro común, explica la evolución de las especies.', explicacion: 'Junto con la variación y el ancestro común, es uno de los tres pilares fundamentales de la teoría de Charles Darwin que explica cómo las especies cambian gradualmente para sobrevivir a las presiones de su entorno.' },
+    'B': { tipo: 'contiene', palabra: 'BEAGLE', pregunta: 'Nombre de la histórica embarcación (HMS Beagle) en la que Darwin realizó su expedición científica de 5 años.', explicacion: 'El HMS Beagle fue la embarcación británica donde Darwin recolectó muestras geológicas y biológicas cruciales a nivel mundial, permitiéndole cuestionar el paradigma del fijismo medieval.' },
+    'C': { tipo: 'empieza', palabra: 'COMTE', pregunta: 'Apellido del filósofo que desarrolló el positivismo y defendió que la sociedad podía estudiarse científicamente.', explicacion: 'Auguste Comte es considerado el padre del positivismo. Sostenía que la sociedad humana pasa por fases evolutivas y puede ser analizada con el mismo rigor y objetividad que las ciencias naturales.' },
+    'D': { tipo: 'empieza', palabra: 'DARWIN', pregunta: 'Apellido del naturalista que rompió el paradigma medieval al defender la observación directa de la naturaleza frente a los textos sagrados.', explicacion: 'Charles Darwin revolucionó la ciencia al demostrar que la biodiversidad es el resultado de procesos naturales de evolución biológica y selección natural, dejando atrás las explicaciones teocéntricas.' },
+    'E': { tipo: 'empieza', palabra: 'ESTADOS', pregunta: 'Nombre que recibe la famosa ley formulada por Auguste Comte sobre las etapas por las que pasa la humanidad.', explicacion: 'La Ley de los Tres Estados de Comte propone que el conocimiento y la historia progresan cruzando tres etapas: el estado teológico (explicaciones divinas), el metafísico (abstracto) y el positivo (científico empírico).' },
+    'F': { tipo: 'empieza', palabra: 'FIJISMO', pregunta: 'Corriente del pensamiento medieval que de forma estática sostenía que el pasado consistía en una creación fija e inmutable.', explicacion: 'El fijismo era la creencia medieval dominante que sostenía que el mundo y todas las especies vivas fueron creados de forma perfecta y definitiva por Dios, permaneciendo inalterables en el tiempo.' },
+    'G': { tipo: 'contiene', palabra: 'GALAPAGOS', pregunta: 'Islas visitadas por Darwin donde la observación de la fauna local se convirtió en una prueba clave para su teoría.', explicacion: 'En el archipiélago de las Galápagos, Darwin observó sutiles variaciones morfológicas entre animales de distintas islas, evidenciando el impacto directo del aislamiento geográfico y la adaptación al entorno.' },
+    'H': { tipo: 'empieza', palabra: 'HECHOS', pregunta: 'Junto con la palabra \'sociales\', define a los fenómenos colectivos que influyen en el comportamiento individual según Durkheim.', explicacion: 'Émile Durkheim acuñó el término \'Hechos Sociales\' para referirse a las formas de actuar, pensar y sentir que son externas al individuo y ejercen una coacción sobre él, siendo el objeto de estudio de la sociología.' },
+    'I': { tipo: 'contiene', palabra: 'INGLATERRA', pregunta: 'País europeo en el cual nació el célebre naturalista Charles Darwin en el año 1809.', explicacion: 'Inglaterra, en pleno desarrollo científico e industrial decimonónico, proveyó el contexto intelectual empirista idóneo para que Darwin desarrollara sus observaciones botánicas y zoológicas.' },
+    'J': { tipo: 'contiene', palabra: 'VIAJE', pregunta: 'Palabra que forma parte del título de una de las obras fundamentales de Darwin escrita tras su expedición de 5 años.', explicacion: 'El diario de viaje de Darwin recopiló minuciosamente las anotaciones empíricas de campo y recolección de especies que sirvieron de cimiento conceptual para su posterior obra maestra sobre la evolución.' },
+    'K': { tipo: 'contiene', palabra: 'DURKHEIM', pregunta: 'Apellido del sociólogo francés que consolidó de manera definitiva la sociología como una disciplina científica.', explicacion: 'Émile Durkheim independizó a la sociología de la filosofía abstracta al dotarla de un método científico propio y riguroso, orientándola al estudio objetivo de las estructuras sociales.' },
+    'L': { tipo: 'empieza', palabra: 'LUCHA', pregunta: 'Concepto clave tanto en la teoría darwiniana (\'por la vida\') como en la teoría social de Karl Marx (\'de clases\').', explicacion: 'La noción de conflicto es un motor central de la modernidad: en biología representa la competencia por la supervivencia ante recursos limitados (Darwin) y en sociología representa la contradicción de clases como motor histórico (Marx).' },
+    'M': { tipo: 'empieza', palabra: 'MARX', pregunta: 'Apellido del filósofo y economista alemán conocido por su crítica al capitalismo y el desarrollo del materialismo histórico.', explicacion: 'Karl Marx es uno de los pensadores más influyentes de la historia; analizó de forma crítica la estructura económica capitalista, la explotación del trabajo y las dinámicas de dominación de clases.' },
+    'N': { tipo: 'empieza', palabra: 'NATURAL', pregunta: 'Tipo de selección teorizada por Darwin donde el medio ambiente determina qué individuos logran sobrevivir y reproducirse.', explicacion: 'La Selección Natural es el mecanismo biológico por el cual las condiciones del entorno eligen de forma no consciente a los organismos con variaciones más aptas, permitiendo su reproducción y herencia.' },
+    'O': { tipo: 'empieza', palabra: 'OBSERVACION', pregunta: 'Herramienta fundamental del positivismo y de las ciencias biológicas modernas para obtener conocimiento mediante la comprobación de hechos.', explicacion: 'La observación empírica sistemática define el cambio de paradigma de la modernidad, reemplazando los dogmas y los silogismos teológicos por la contrastación directa de la realidad observable.' },
+    'P': { tipo: 'empieza', palabra: 'POSITIVISMO', pregunta: 'Pensamiento formulado por Comte que establece que el conocimiento auténtico proviene exclusivamente de la observación y la experimentación.', explicacion: 'El positivismo es la corriente filosófica que rechaza la metafísica y postula que el único conocimiento válido es el científico, estructurado mediante leyes universales obtenidas experimentalmente.' },
+    'Q': { tipo: 'contiene', palabra: 'CUALQUIER', pregunta: 'Palabra exacta utilizada en el texto para señalar que los individuos dentro de \'este tipo\' de población biológica exhiben diferencias genéticas aleatorias.', explicacion: 'El análisis biológico moderno remarca que en \'cualquier\' población los individuos muestran diferencias genéticas aleatorias de nacimiento; la variabilidad interna es la norma y no la excepción.' },
+    'R': { tipo: 'empieza', palabra: 'RECURSOS', pregunta: 'Elementos del medio ambiente que, al presentarse de forma limitada, desencadenan la competencia por la supervivencia entre los seres vivos.', explicacion: 'Dado que el alimento y el espacio habitable son inherentemente limitados en la naturaleza, se genera una presión ecológica insoslayable que fuerza la supervivencia exclusiva de los más aptos.' },
+    'S': { tipo: 'empieza', palabra: 'SOCIOLOGIA', pregunta: 'Ciencia que estudia la sociedad de forma objetiva y que tuvo a Comte y a Durkheim como sus máximos pilares y fundadores.', explicacion: 'La sociología nació formalmente en el siglo XIX con la misión de entender de manera científica, empírica y organizada las crisis, el ordenamiento institucional y las dinámicas colectivas del ser humano.' },
+    'T': { tipo: 'empieza', palabra: 'TORTUGAS', pregunta: 'Animales que, junto a los pinzones, sirvieron a Darwin como evidencia de campo de que el entorno modifica la herencia biológica.', explicacion: 'Las tortugas gigantes de las Galápagos exhibían caparazones con formas adaptadas específicamente al tipo de vegetación de su isla correspondiente, proveyendo evidencia física de evolución ambiental.' },
+    'U': { tipo: 'contiene', palabra: 'EVOLUCION', pregunta: 'Proceso continuo y fluido que reemplaza la pirámide medieval y explica el desarrollo de la biodiversidad.', explicacion: 'La evolución sustituyó la rígida pirámide jerárquica de la creación divina por la imagen de un árbol ramificado continuo, donde toda criatura viva comparte un ancestro común remoto.' },
+    'V': { tipo: 'empieza', palabra: 'VARIABILIDAD', pregunta: 'Condición biológica que rompe el concepto estático medieval debido a que los individuos poseen diferencias genéticas aleatorias.', explicacion: 'La variabilidad genética implica que ningún ser vivo es una copia idéntica estática. Estas diferencias individuales azarosas constituyen la materia prima sobre la cual opera la selección natural.' },
+    'W': { tipo: 'contiene', palabra: 'HENSLOW', pregunta: 'Apellido de John, el mentor intelectual que impulsó el interés de Darwin por la geología y la recolección de especies.', explicacion: 'John Henslow fue el académico, botánico y sacerdote que guió los inicios científicos de Darwin y gestionó estratégicamente su invitación al viaje del Beagle, cambiando la historia de la ciencia.' },
+    'X': { tipo: 'contiene', palabra: 'MARX', pregunta: 'Pensador cuyo legado teórico e histórico influyó directamente en el desarrollo del socialismo, el comunismo y la política moderna.', explicacion: 'La perspectiva materialista de Karl Marx situó las relaciones de producción económica en el eje explicativo del desarrollo sociohistórico, moldeando los movimientos políticos mundiales.' },
+    'Y': { tipo: 'contiene', palabra: 'LEY', pregunta: 'Término con el que Comte define las etapas de la humanidad dentro de su propuesta sociológica.', explicacion: 'Comte buscaba formular leyes universales de la sociedad análogas a las de la física, persiguiendo guiar el desarrollo de las naciones bajo el axioma positivista de \'Orden y Progreso\'.' },
+    'Z': { tipo: 'contiene', palabra: 'PINZONES', pregunta: 'Aves observadas por Darwin cuya variación entre diferentes islas sirvió como prueba directa de adaptación al entorno.', explicacion: 'Los pinzones de las Galápagos presentaban picos modificados según el alimento dominante de cada isla (semillas, insectos, frutos), demostrando de forma contundente la radiación adaptativa.' }
   };
 
   // ============ VARIABLES GLOBALES ============
@@ -642,6 +803,7 @@
   let aciertos = 0;
   let letrasResueltas = new Set();
   let modalTimeout = null;
+  let elementosLetras = {};
 
   // ============ FUNCIONES AUXILIARES ============
   
@@ -673,19 +835,16 @@
       .replace(/ú|ù|ü/g, 'u');
   }
 
-  function verificarRespuesta(respuesta, respuestaCorrecta, alternativas) {
+  function verificarRespuesta(respuesta, palabra) {
     const respNormalizada = normalizarRespuesta(respuesta);
-    const correctaNormalizada = normalizarRespuesta(respuestaCorrecta);
+    const palabraNormalizada = normalizarRespuesta(palabra);
     
-    if (respNormalizada === correctaNormalizada) return true;
+    // Búsqueda exacta
+    if (respNormalizada === palabraNormalizada) return true;
     
-    for (let alt of alternativas) {
-      if (respNormalizada === normalizarRespuesta(alt)) return true;
-    }
-
-    // Fuzzy matching: permite 1 carácter de error máximo
-    const maxError = Math.ceil(respuestaCorrecta.length * 0.15); // 15% del largo
-    if (levenshteinDistance(respNormalizada, correctaNormalizada) <= maxError) return true;
+    // Fuzzy matching con Levenshtein
+    const maxError = Math.ceil(palabra.length * 0.15);
+    if (levenshteinDistance(respNormalizada, palabraNormalizada) <= maxError) return true;
 
     return false;
   }
@@ -694,13 +853,11 @@
   function dibujarRosco() {
     const svg = document.getElementById('letters');
     const radio = 140;
-    const colores = ['#888888', '#888888', '#888888', '#888888', '#888888', '#888888'];
 
     letras.forEach((letra, i) => {
       const angulo = (i / letras.length) * Math.PI * 2 - Math.PI / 2;
       const x = 200 + radio * Math.cos(angulo);
       const y = 200 + radio * Math.sin(angulo);
-      const color = colores[i % colores.length];
 
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.style.cursor = 'pointer';
@@ -711,7 +868,7 @@
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
       circle.setAttribute('r', 28);
-      circle.setAttribute('fill', color);
+      circle.setAttribute('fill', '#5a6b7a');
       circle.setAttribute('stroke', 'white');
       circle.setAttribute('stroke-width', '2');
       circle.setAttribute('filter', 'url(#shadow)');
@@ -728,31 +885,50 @@
 
       g.appendChild(circle);
       g.appendChild(text);
-      g.addEventListener('click', () => seleccionarLetra(letra));
+      g.addEventListener('click', () => {
+        audioManager.playSound('click');
+        seleccionarLetra(letra);
+      });
       
+      elementosLetras[letra] = { element: g, circle };
       svg.appendChild(g);
     });
   }
 
   function iluminarLetra(letra) {
-    const element = document.getElementById(`letter-${letra}`);
-    if (element) {
-      const circle = element.querySelector('.letter-circle-shape');
-      circle.setAttribute('fill', '#28a745');
-      circle.setAttribute('stroke', '#1e7e34');
-    }
+    const obj = elementosLetras[letra];
+    if (!obj) return;
+
+    const circle = obj.circle;
+    circle.setAttribute('fill', '#28a745');
+    circle.setAttribute('stroke', '#1e7e34');
+    obj.element.classList.add('solved');
   }
 
   // ============ CONTROL DE JUEGO ============
   function seleccionarLetra(letra) {
     if (letrasResueltas.has(letra)) return;
 
+    // Remover clase active de letra anterior
+    if (letraActual) {
+      const obj = elementosLetras[letraActual];
+      if (obj) obj.element.classList.remove('active');
+    }
+
     letraActual = letra;
     const datos = preguntas[letra];
 
+    // Agregar clase active a letra nueva
+    const obj = elementosLetras[letra];
+    if (obj) obj.element.classList.add('active');
+
     document.getElementById('center-letter').textContent = letra;
     document.getElementById('letter-badge').textContent = letra;
-    document.getElementById('question-text').textContent = datos.pregunta.replace(`[${letra}]`, '').trim();
+    
+    const preguntaLimpia = datos.pregunta;
+    document.getElementById('question-text').textContent = preguntaLimpia;
+    document.getElementById('question-hint').textContent = `[${datos.tipo.toUpperCase()}] → "${datos.palabra}"`;
+
     document.getElementById('answer-input').value = '';
     document.getElementById('answer-input').disabled = false;
     document.getElementById('answer-input').focus();
@@ -766,18 +942,19 @@
 
     const respuesta = document.getElementById('answer-input').value;
     const datos = preguntas[letraActual];
-    const esCorrecta = verificarRespuesta(respuesta, datos.respuesta, datos.respuestas_alt);
+    const esCorrecta = verificarRespuesta(respuesta, datos.palabra);
 
     const feedback = document.getElementById('feedback');
 
     if (esCorrecta) {
+      audioManager.playSound('correct');
       aciertos++;
       letrasResueltas.add(letraActual);
       iluminarLetra(letraActual);
       
       feedback.classList.remove('hidden', 'incorrect');
       feedback.classList.add('correct');
-      feedback.textContent = `✓ ¡Correcto! La respuesta es ${datos.respuesta}`;
+      feedback.textContent = `✓ ¡Correcto! "${datos.palabra}"`;
 
       document.getElementById('answer-input').disabled = true;
       document.getElementById('btn-verify').disabled = true;
@@ -785,7 +962,6 @@
 
       actualizarScore();
 
-      // Mostrar modal después de 3 segundos
       if (modalTimeout) clearTimeout(modalTimeout);
       modalTimeout = setTimeout(() => mostrarModalInfo(), 3000);
     } else {
@@ -803,7 +979,7 @@
     
     feedback.classList.remove('hidden', 'correct');
     feedback.classList.add('incorrect');
-    feedback.textContent = `Saltada. La respuesta correcta era: ${datos.respuesta}`;
+    feedback.textContent = `Saltada. Respuesta: "${datos.palabra}"`;
 
     document.getElementById('answer-input').disabled = true;
     document.getElementById('btn-verify').disabled = true;
@@ -811,13 +987,16 @@
   }
 
   function mostrarModalInfo() {
+    audioManager.playSound('modalOpen');
+    
     const letra = letraActual;
     const datos = preguntas[letra];
 
     document.getElementById('info-letter').textContent = letra;
-    document.getElementById('info-question').textContent = datos.pregunta.replace(`[${letra}]`, '').trim();
-    document.getElementById('info-answer').textContent = datos.respuesta;
+    document.getElementById('info-question').textContent = datos.pregunta;
+    document.getElementById('info-answer').textContent = datos.palabra;
     document.getElementById('info-explanation').textContent = datos.explicacion;
+    document.getElementById('info-type').textContent = datos.tipo.toUpperCase();
 
     const modal = document.getElementById('info-modal');
     modal.classList.add('active');
@@ -846,6 +1025,13 @@
     if (e.target === document.getElementById('info-modal')) {
       cerrarModalInfo();
     }
+  });
+
+  document.getElementById('btn-mute').addEventListener('click', function() {
+    audioManager.toggle();
+    this.classList.toggle('muted');
+    this.textContent = audioManager.enabled ? '🔊' : '🔇';
+    audioManager.playSound('click');
   });
 
   // ============ INICIALIZAR ============
